@@ -73,7 +73,24 @@
               id="532f0433-8801-4463-95d9-1741afc221d9" involved="#37ebfe2d-6e70-40fc-9e6c-88cc25ae4201"/>
         </ownedOperationalCapabilities>
         <ownedOperationalCapabilities xsi:type="org.polarsys.capella.core.data.oa:OperationalCapability"
-            id="3631b14f-1f20-4f48-b9ab-e9d9c263d0f8" name="Extrair Insights Sobre a Frota"/>
+            id="3631b14f-1f20-4f48-b9ab-e9d9c263d0f8" name="Extrair Informações Sobre a Frota">
+          <includes xsi:type="org.polarsys.capella.core.data.interaction:AbstractCapabilityInclude"
+              id="5060aeca-9696-4688-ae97-5c883ba632db" included="#41328ab4-6234-40fd-aa61-b934ac4fe97e"/>
+          <includes xsi:type="org.polarsys.capella.core.data.interaction:AbstractCapabilityInclude"
+              id="8c1cd065-6ac2-4192-b3f0-94c0dcbc650b" included="#6b7338aa-efd6-422e-8ef2-174ccc3f09cd"/>
+          <includes xsi:type="org.polarsys.capella.core.data.interaction:AbstractCapabilityInclude"
+              id="25a35d66-8d2e-41b3-8a0e-a1eba6d50677" included="#84b3fc02-5ab8-40f9-8f37-32eb985b6315"/>
+          <includes xsi:type="org.polarsys.capella.core.data.interaction:AbstractCapabilityInclude"
+              id="f98f4123-e0fb-42e9-abd9-21ff42860e66" included="#be9ef598-3fc1-479a-ba01-1701f46cd670"/>
+        </ownedOperationalCapabilities>
+        <ownedOperationalCapabilities xsi:type="org.polarsys.capella.core.data.oa:OperationalCapability"
+            id="41328ab4-6234-40fd-aa61-b934ac4fe97e" name="Detectar veículos que excedem limites de velocidade com frequência"/>
+        <ownedOperationalCapabilities xsi:type="org.polarsys.capella.core.data.oa:OperationalCapability"
+            id="6b7338aa-efd6-422e-8ef2-174ccc3f09cd" name="Classificar comportamento de condução (agressivo / econômico / normal)"/>
+        <ownedOperationalCapabilities xsi:type="org.polarsys.capella.core.data.oa:OperationalCapability"
+            id="84b3fc02-5ab8-40f9-8f37-32eb985b6315" name="Detecção de uso indevido do veículo (desvios de rota / paradas não autorizadas)"/>
+        <ownedOperationalCapabilities xsi:type="org.polarsys.capella.core.data.oa:OperationalCapability"
+            id="be9ef598-3fc1-479a-ba01-1701f46cd670" name="Monitoramento de tempo de marcha/ócio (utilização da frota)"/>
       </ownedAbstractCapabilityPkg>
       <ownedInterfacePkg xsi:type="org.polarsys.capella.core.data.cs:InterfacePkg"
           id="518c4c9c-3a05-46fe-b991-2c5798e0da32" name="Interfaces"/>
