@@ -66,7 +66,7 @@
     </ownedViews>
     <ownedViews xmi:type="viewpoint:DView" uid="_YVgPEK6QEfCTgI8sLSr_kQ">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/EPBS.odesign#//@ownedViewpoints[name='EPBS%20architecture']"/>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="__K57QLl5EfCH2pbzG1JcuQ" name="[CIBD] System" repPath="#__K3fALl5EfCH2pbzG1JcuQ" changeId="1762269739745">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="__K57QLl5EfCH2pbzG1JcuQ" name="[CIBD] Configuration Items Breakdown" repPath="#__K3fALl5EfCH2pbzG1JcuQ" changeId="1762269739745">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/EPBS.odesign#//@ownedViewpoints[name='EPBS%20architecture']/@ownedRepresentations[name='Configuration%20Items%20Breakdown']"/>
         <target xmi:type="org.polarsys.capella.core.data.epbs:ConfigurationItem" href="IN1090.capella#fe64d694-45a2-4637-bdde-6f743c34bdb4"/>
       </ownedRepresentationDescriptors>
