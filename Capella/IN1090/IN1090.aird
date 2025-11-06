@@ -12,7 +12,7 @@
     </ownedViews>
     <ownedViews xmi:type="viewpoint:DView" uid="_X5_-0K6QEfCTgI8sLSr_kQ">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']"/>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_-sbMcLftEfColIjWzQlNfg" name="[LAB] Logic Architecture" repPath="#_-sW7ALftEfColIjWzQlNfg" changeId="1762401422905">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_-sbMcLftEfColIjWzQlNfg" name="[LAB] Logic Architecture" repPath="#_-sW7ALftEfColIjWzQlNfg" changeId="1762401508715">
         <eAnnotations xmi:type="description:DAnnotation" uid="_-se20LftEfColIjWzQlNfg" source="https://www.polarsys.org/capella/dannotation/DesactivatedFilters">
           <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_-se20bftEfColIjWzQlNfg" key="hide.computed.component.exchanges.filter" value="true"/>
           <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_-se20rftEfColIjWzQlNfg" key="hide.computed.physical.links.filter" value="true"/>
@@ -1501,7 +1501,7 @@
         <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Architecture%20Blank']/@defaultLayer/@containerMappings[name='LAB%20Logical%20Component']/@style"/>
       </ownedStyle>
       <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Architecture%20Blank']/@defaultLayer/@containerMappings[name='LAB%20Logical%20Component']"/>
-      <ownedDiagramElements xmi:type="diagram:DNodeContainer" uid="_9aU6oLkaEfCH06WSd4mzqg" name="Embarcado" incomingEdges="_dMvjZLkbEfCH06WSd4mzqg">
+      <ownedDiagramElements xmi:type="diagram:DNodeContainer" uid="_9aU6oLkaEfCH06WSd4mzqg" name="Coleta" incomingEdges="_dMvjZLkbEfCH06WSd4mzqg">
         <target xmi:type="org.polarsys.capella.core.data.cs:Part" href="IN1090.capella#eb70c1d1-c39e-4232-91af-f309ed4f3e3a"/>
         <semanticElements xmi:type="org.polarsys.capella.core.data.cs:Part" href="IN1090.capella#eb70c1d1-c39e-4232-91af-f309ed4f3e3a"/>
         <semanticElements xmi:type="org.polarsys.capella.core.data.la:LogicalComponent" href="IN1090.capella#20cda805-17c5-4453-a471-6c912f4ecd4f"/>
@@ -1536,7 +1536,7 @@
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Architecture%20Blank']/@defaultLayer/@containerMappings[name='LAB%20Logical%20Component']/@subNodeMappings[name='LAB%20Logical%20Function']"/>
         </ownedDiagramElements>
       </ownedDiagramElements>
-      <ownedDiagramElements xmi:type="diagram:DNodeContainer" uid="_GzBvYLkbEfCH06WSd4mzqg" name="Client">
+      <ownedDiagramElements xmi:type="diagram:DNodeContainer" uid="_GzBvYLkbEfCH06WSd4mzqg" name="Visualização">
         <target xmi:type="org.polarsys.capella.core.data.cs:Part" href="IN1090.capella#df35a05f-a1d7-45bc-b011-bc482e13daba"/>
         <semanticElements xmi:type="org.polarsys.capella.core.data.cs:Part" href="IN1090.capella#df35a05f-a1d7-45bc-b011-bc482e13daba"/>
         <semanticElements xmi:type="org.polarsys.capella.core.data.la:LogicalComponent" href="IN1090.capella#7865d2f1-39f4-447a-85f9-bf9cf82f8181"/>
@@ -1580,7 +1580,7 @@
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Architecture%20Blank']/@defaultLayer/@containerMappings[name='LAB%20Logical%20Component']/@subNodeMappings[name='LAB%20Logical%20Function']"/>
         </ownedDiagramElements>
       </ownedDiagramElements>
-      <ownedDiagramElements xmi:type="diagram:DNodeContainer" uid="_U0uIgLkbEfCH06WSd4mzqg" name="Backend">
+      <ownedDiagramElements xmi:type="diagram:DNodeContainer" uid="_U0uIgLkbEfCH06WSd4mzqg" name="Processamento e Armazenamento">
         <target xmi:type="org.polarsys.capella.core.data.cs:Part" href="IN1090.capella#6615a0e6-ea6c-468a-882a-1109e3ec25c9"/>
         <semanticElements xmi:type="org.polarsys.capella.core.data.cs:Part" href="IN1090.capella#6615a0e6-ea6c-468a-882a-1109e3ec25c9"/>
         <semanticElements xmi:type="org.polarsys.capella.core.data.la:LogicalComponent" href="IN1090.capella#b0e8e340-f4e3-40c5-a9a7-92090607660f"/>

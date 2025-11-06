@@ -534,28 +534,28 @@
               id="7f2e3aa2-a5a2-481e-ace4-0964cef46249" targetElement="#93f0de6f-b1f7-4876-b753-c8d44caceede"
               sourceElement="#bfd781aa-591e-4d57-8814-742db3ecc500"/>
           <ownedFeatures xsi:type="org.polarsys.capella.core.data.cs:Part" id="eb70c1d1-c39e-4232-91af-f309ed4f3e3a"
-              name="Embarcado" abstractType="#20cda805-17c5-4453-a471-6c912f4ecd4f"/>
+              name="Coleta" abstractType="#20cda805-17c5-4453-a471-6c912f4ecd4f"/>
           <ownedFeatures xsi:type="org.polarsys.capella.core.data.cs:Part" id="df35a05f-a1d7-45bc-b011-bc482e13daba"
-              name="Client" abstractType="#7865d2f1-39f4-447a-85f9-bf9cf82f8181"/>
+              name="Visualização" abstractType="#7865d2f1-39f4-447a-85f9-bf9cf82f8181"/>
           <ownedFeatures xsi:type="org.polarsys.capella.core.data.cs:Part" id="6615a0e6-ea6c-468a-882a-1109e3ec25c9"
-              name="Backend" abstractType="#b0e8e340-f4e3-40c5-a9a7-92090607660f"/>
+              name="Processamento e Armazenamento" abstractType="#b0e8e340-f4e3-40c5-a9a7-92090607660f"/>
           <ownedComponentRealizations xsi:type="org.polarsys.capella.core.data.cs:ComponentRealization"
               id="24c507f2-c949-4585-9292-319252ae8e92" targetElement="#1088ac4b-623f-4f88-937f-34717e87ba4d"
               sourceElement="#40725156-f3df-4c8e-be38-fc14b5f0b690"/>
           <ownedLogicalComponents xsi:type="org.polarsys.capella.core.data.la:LogicalComponent"
-              id="20cda805-17c5-4453-a471-6c912f4ecd4f" name="Embarcado">
+              id="20cda805-17c5-4453-a471-6c912f4ecd4f" name="Coleta">
             <ownedFunctionalAllocation xsi:type="org.polarsys.capella.core.data.fa:ComponentFunctionalAllocation"
                 id="bfd781aa-591e-4d57-8814-742db3ecc500" targetElement="#ead23702-1f16-404d-afae-3a715d300790"
                 sourceElement="#20cda805-17c5-4453-a471-6c912f4ecd4f"/>
           </ownedLogicalComponents>
           <ownedLogicalComponents xsi:type="org.polarsys.capella.core.data.la:LogicalComponent"
-              id="7865d2f1-39f4-447a-85f9-bf9cf82f8181" name="Client">
+              id="7865d2f1-39f4-447a-85f9-bf9cf82f8181" name="Visualização">
             <ownedFunctionalAllocation xsi:type="org.polarsys.capella.core.data.fa:ComponentFunctionalAllocation"
                 id="1aff5dc3-b0c6-4207-99a0-5e07e393cf9c" targetElement="#e2516a0a-64b2-48c3-976e-2265375b6b7d"
                 sourceElement="#7865d2f1-39f4-447a-85f9-bf9cf82f8181"/>
           </ownedLogicalComponents>
           <ownedLogicalComponents xsi:type="org.polarsys.capella.core.data.la:LogicalComponent"
-              id="b0e8e340-f4e3-40c5-a9a7-92090607660f" name="Backend">
+              id="b0e8e340-f4e3-40c5-a9a7-92090607660f" name="Processamento e Armazenamento">
             <ownedFunctionalAllocation xsi:type="org.polarsys.capella.core.data.fa:ComponentFunctionalAllocation"
                 id="38427fca-51cf-40f1-9531-a4b18311a853" targetElement="#b4aac2cd-9153-48ca-abb0-1c536aaa7786"
                 sourceElement="#b0e8e340-f4e3-40c5-a9a7-92090607660f"/>
