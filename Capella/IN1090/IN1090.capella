@@ -49,7 +49,7 @@
           <ownedFunctions xsi:type="org.polarsys.capella.core.data.oa:OperationalActivity"
               id="942ed173-8f94-40ea-b1e0-4f19f6d72e0c" name="Fornece Dados"/>
           <ownedFunctions xsi:type="org.polarsys.capella.core.data.oa:OperationalActivity"
-              id="6e2c9fcd-aa0a-4cbd-a71d-cb0a567d958e" name="Visualiza Dados em Tempo Real e Históricos da Frota de Veículos + Insights Sobre a Frota"/>
+              id="6e2c9fcd-aa0a-4cbd-a71d-cb0a567d958e" name="Visualiza Dados em Tempo Real e Históricos da Frota de Veículos + Iformações Sobre a Frota"/>
           <ownedFunctionalExchanges xsi:type="org.polarsys.capella.core.data.fa:FunctionalExchange"
               id="d6034f28-a476-41a9-a6e5-cadb543a5ba9" name="Dados" target="#6e2c9fcd-aa0a-4cbd-a71d-cb0a567d958e"
               source="#942ed173-8f94-40ea-b1e0-4f19f6d72e0c"/>
@@ -163,7 +163,7 @@
                 sourceElement="#ac656e60-4975-42ae-a171-fb9850c0b681"/>
           </ownedFunctions>
           <ownedFunctions xsi:type="org.polarsys.capella.core.data.ctx:SystemFunction"
-              id="32300cc0-3581-43bb-825a-ed9bba812c0c" name="Extrai Insights Sobre a Frota">
+              id="32300cc0-3581-43bb-825a-ed9bba812c0c" name="Extrai Informações Sobre a Frota">
             <inputs xsi:type="org.polarsys.capella.core.data.fa:FunctionInputPort"
                 id="7fa35ab6-1c0d-4979-b571-678a69fc4e61" name="FIP 1"/>
             <outputs xsi:type="org.polarsys.capella.core.data.fa:FunctionOutputPort"
@@ -471,7 +471,7 @@
             </outputs>
           </ownedFunctions>
           <ownedFunctions xsi:type="org.polarsys.capella.core.data.la:LogicalFunction"
-              id="f5c24b29-9bbd-4dd1-8868-ad3fdf5bbca4" name="Extrai Insights Sobre a Frota">
+              id="f5c24b29-9bbd-4dd1-8868-ad3fdf5bbca4" name="Extrai Informações Sobre a Frota">
             <inputs xsi:type="org.polarsys.capella.core.data.fa:FunctionInputPort"
                 id="05297ece-7270-4010-9d7d-464a0d8339d2" name="FIP 1"/>
             <outputs xsi:type="org.polarsys.capella.core.data.fa:FunctionOutputPort"
@@ -677,7 +677,7 @@
                 sourceElement="#6221cfc7-e15d-4b52-9c61-3e32e792fd83"/>
           </ownedFunctions>
           <ownedFunctions xsi:type="org.polarsys.capella.core.data.pa:PhysicalFunction"
-              id="1ee5e972-32b0-44eb-8397-71eb3bd7344d" name="Exibe uma Visualização de Dados em Tempo Real e Históricos da Frota de Veículos + Insights Sobre a Frota">
+              id="1ee5e972-32b0-44eb-8397-71eb3bd7344d" name="Exibe uma Visualização de Dados em Tempo Real e Históricos da Frota de Veículos + Informações Sobre a Frota">
             <ownedConstraints xsi:type="org.polarsys.capella.core.data.capellacore:Constraint"
                 id="4f4ffd8c-9d3f-4dc8-88e9-e3d6fd580a8f" name="0..*" constrainedElements="#1ee5e972-32b0-44eb-8397-71eb3bd7344d #80850ba5-73ca-49ae-9343-9db3634487c6">
               <ownedSpecification xsi:type="org.polarsys.capella.core.data.information.datavalue:OpaqueExpression"
@@ -727,7 +727,7 @@
                 sourceElement="#f975cf75-13be-440f-b17c-d5bd4a753711"/>
           </ownedFunctions>
           <ownedFunctions xsi:type="org.polarsys.capella.core.data.pa:PhysicalFunction"
-              id="778c2557-f36a-452b-a45e-9b04440fc85d" name="Extrai Insights Sobre a Frota">
+              id="778c2557-f36a-452b-a45e-9b04440fc85d" name="Extrai Informações Sobre a Frota">
             <inputs xsi:type="org.polarsys.capella.core.data.fa:FunctionInputPort"
                 id="1851b4f9-2fb6-4ff2-9826-a56fbdeebc17" name="FIP 1">
               <ownedPortRealizations xsi:type="org.polarsys.capella.core.data.information:PortRealization"
@@ -916,13 +916,13 @@
           <ownedFeatures xsi:type="org.polarsys.capella.core.data.cs:Part" id="e2363c8c-2752-4ac5-bae4-c6254b2ed71e"
               name="Backend" abstractType="#688f7a8b-2040-4f99-a0f2-a30404bad7e1"/>
           <ownedFeatures xsi:type="org.polarsys.capella.core.data.cs:Part" id="c0348c50-537a-4da0-b3b5-de3eadc6054f"
-              name="Cloud Hosting" abstractType="#09e88693-787b-4f5a-9a12-74dd6b0eaa7f">
+              name="Cloud Hosting (Backend)" abstractType="#09e88693-787b-4f5a-9a12-74dd6b0eaa7f">
             <ownedDeploymentLinks xsi:type="org.polarsys.capella.core.data.pa.deployment:PartDeploymentLink"
                 id="7770c4f6-5883-4a13-b96e-b23943007db4" deployedElement="#e2363c8c-2752-4ac5-bae4-c6254b2ed71e"
                 location="#c0348c50-537a-4da0-b3b5-de3eadc6054f"/>
           </ownedFeatures>
           <ownedFeatures xsi:type="org.polarsys.capella.core.data.cs:Part" id="994a0e30-40cf-4304-90c5-cdc6a247ef22"
-              name="Cloud Hosting" abstractType="#fde9f9a3-f6ad-45bc-9350-9cd73e26bd3f">
+              name="Cloud Hosting (Client)" abstractType="#fde9f9a3-f6ad-45bc-9350-9cd73e26bd3f">
             <ownedDeploymentLinks xsi:type="org.polarsys.capella.core.data.pa.deployment:PartDeploymentLink"
                 id="c24e0847-f670-49c8-854d-1667aa31e4cc" deployedElement="#0d7a3887-7416-4712-8bf2-573db1ed9576"
                 location="#994a0e30-40cf-4304-90c5-cdc6a247ef22"/>
@@ -1006,7 +1006,8 @@
             </ownedFeatures>
           </ownedPhysicalComponents>
           <ownedPhysicalComponents xsi:type="org.polarsys.capella.core.data.pa:PhysicalComponent"
-              id="09e88693-787b-4f5a-9a12-74dd6b0eaa7f" name="Cloud Hosting" nature="NODE">
+              id="09e88693-787b-4f5a-9a12-74dd6b0eaa7f" name="Cloud Hosting (Backend)"
+              nature="NODE">
             <ownedFeatures xsi:type="org.polarsys.capella.core.data.cs:PhysicalPort"
                 id="1806159d-fdfa-489e-826a-3cc240812164" name="PP 1">
               <ownedComponentPortAllocations xsi:type="org.polarsys.capella.core.data.fa:ComponentPortAllocation"
@@ -1020,7 +1021,8 @@
                 sourceElement="#09e88693-787b-4f5a-9a12-74dd6b0eaa7f"/>
           </ownedPhysicalComponents>
           <ownedPhysicalComponents xsi:type="org.polarsys.capella.core.data.pa:PhysicalComponent"
-              id="fde9f9a3-f6ad-45bc-9350-9cd73e26bd3f" name="Cloud Hosting" nature="NODE">
+              id="fde9f9a3-f6ad-45bc-9350-9cd73e26bd3f" name="Cloud Hosting (Client)"
+              nature="NODE">
             <ownedFeatures xsi:type="org.polarsys.capella.core.data.cs:PhysicalPort"
                 id="602690f5-9b7d-4c7b-9293-7b7b4a776c4e" name="PP 1"/>
             <ownedComponentRealizations xsi:type="org.polarsys.capella.core.data.cs:ComponentRealization"
@@ -1192,20 +1194,22 @@
                 name="Cloud-Hosted Backend" abstractType="#0987f5d1-bbb6-4125-9bb9-5c4297ab5da8"/>
             <ownedFeatures xsi:type="org.polarsys.capella.core.data.cs:Part" id="a477f02a-1336-4889-b1f4-efd15c4a9139"
                 name="Cloud-Hosted Web Client" abstractType="#8b3baec3-1b55-4399-ac7a-c6e20139aef0"/>
+            <ownedFeatures xsi:type="org.polarsys.capella.core.data.cs:Part" id="0cf303cc-3720-4cdf-a736-52e117f42a9a"
+                name="Veículo &lt;> Scanner" abstractType="#87f5ceed-8dfe-407c-92b6-47cb17a3582f"/>
+            <ownedFeatures xsi:type="org.polarsys.capella.core.data.cs:Part" id="0ac23809-58f5-4c7f-a4b5-936e29dc9dad"
+                name="Application Layer Protocol para ESP32 &lt;> Backend" abstractType="#498dbb76-0127-4163-b160-0fa617c7ce8c"/>
             <ownedConfigurationItems xsi:type="org.polarsys.capella.core.data.epbs:ConfigurationItem"
                 id="dbed70e3-19c8-46c5-9e66-4eb1d3e1f9d4" name="(Embarcado no Veículo)"
                 kind="PrimeItemCI">
               <ownedFeatures xsi:type="org.polarsys.capella.core.data.cs:Part" id="c580274b-cf39-4e22-ad70-ee7629ca32c9"
-                  name="*ELM327 OBD2 Scanner Bluethooth " abstractType="#cff9fb1c-67a8-4051-8677-3d6e1513a9dc"/>
+                  name="*ELM327 OBD2 Bluetooth Scanner" abstractType="#cff9fb1c-67a8-4051-8677-3d6e1513a9dc"/>
               <ownedFeatures xsi:type="org.polarsys.capella.core.data.cs:Part" id="f0448336-3f92-4f80-b654-e6377b004d46"
                   name="ESP32" abstractType="#c1313d7f-ae34-46a2-9449-c50cd58e1cd5"/>
               <ownedFeatures xsi:type="org.polarsys.capella.core.data.cs:Part" id="7754058f-ea5c-4bb2-bebd-61475a98f02a"
                   name="Scanner &lt;> Placa Embarcada" abstractType="#a017ed41-5b57-4c92-ac94-21635d6ee6d6"/>
-              <ownedFeatures xsi:type="org.polarsys.capella.core.data.cs:Part" id="0cf303cc-3720-4cdf-a736-52e117f42a9a"
-                  name="Veículo &lt;> Scanner" abstractType="#87f5ceed-8dfe-407c-92b6-47cb17a3582f"/>
               <ownedConfigurationItems xsi:type="org.polarsys.capella.core.data.epbs:ConfigurationItem"
                   id="cff9fb1c-67a8-4051-8677-3d6e1513a9dc" description="&lt;p>&lt;a href=&quot;https://www.amazon.com.br/Bluethooth-Scanner-Diagn%C3%B3stico-Automotivo-ELM327/dp/B00QUL6U8Y?source=ps-sl-shoppingads-lpcontext&amp;amp;amp&amp;amp;amp&amp;amp;psc=1&amp;amp;amp&amp;amp;amp&amp;amp;smid=A30AYYSYOBOWZR&amp;amp;quot&quot;>Link Amazon&lt;/a>&lt;/p>&#xA;&#xA;&lt;p>&amp;nbsp;&lt;/p>&#xA;"
-                  name="*ELM327 OBD2 Scanner Bluethooth " kind="COTSCI">
+                  name="*ELM327 OBD2 Bluetooth Scanner" kind="COTSCI">
                 <ownedConstraints xsi:type="org.polarsys.capella.core.data.capellacore:Constraint"
                     id="c550a585-c312-462f-b95c-dded20fc751c" name="" constrainedElements="#cff9fb1c-67a8-4051-8677-3d6e1513a9dc">
                   <ownedSpecification xsi:type="org.polarsys.capella.core.data.information.datavalue:OpaqueExpression"
@@ -1221,9 +1225,14 @@
               <ownedConfigurationItems xsi:type="org.polarsys.capella.core.data.epbs:ConfigurationItem"
                   id="c1313d7f-ae34-46a2-9449-c50cd58e1cd5" name="ESP32" kind="COTSCI">
                 <ownedFeatures xsi:type="org.polarsys.capella.core.data.cs:Part" id="8f899a15-22e3-49f6-ad36-0f0f93e0d5f2"
-                    name="Software" abstractType="#3fb67136-69c7-4a97-992e-e7d8347507fe"/>
+                    name="*ESP32 Software" abstractType="#3fb67136-69c7-4a97-992e-e7d8347507fe"/>
                 <ownedConfigurationItems xsi:type="org.polarsys.capella.core.data.epbs:ConfigurationItem"
-                    id="3fb67136-69c7-4a97-992e-e7d8347507fe" name="Software" kind="CSCI"/>
+                    id="3fb67136-69c7-4a97-992e-e7d8347507fe" description="&lt;p>look into for REQ 1: https://github.com/PowerBroker2/ELMduino?tab=readme-ov-file&lt;/p>&#xA;"
+                    name="*ESP32 Software" kind="CSCI">
+                  <ownedPhysicalArtifactRealizations xsi:type="org.polarsys.capella.core.data.epbs:PhysicalArtifactRealization"
+                      id="fb76b1d9-3903-43e2-877d-3ad2cf3f7658" targetElement="#695f6ce4-e124-41f1-bf14-527d53f387ab"
+                      sourceElement="#3fb67136-69c7-4a97-992e-e7d8347507fe"/>
+                </ownedConfigurationItems>
                 <ownedPhysicalArtifactRealizations xsi:type="org.polarsys.capella.core.data.epbs:PhysicalArtifactRealization"
                     id="eb3a9a55-75d2-4311-af8a-4a902ef3d696" targetElement="#6a05db59-2c4b-4d6f-be91-8644a582955e"
                     sourceElement="#c1313d7f-ae34-46a2-9449-c50cd58e1cd5"/>
@@ -1232,29 +1241,19 @@
                   id="a017ed41-5b57-4c92-ac94-21635d6ee6d6" name="Scanner &lt;> Placa Embarcada"
                   kind="PrimeItemCI">
                 <ownedFeatures xsi:type="org.polarsys.capella.core.data.cs:Part" id="51c4d840-13e8-4635-a500-86a5f8b6daa5"
-                    name="Bluetooth" abstractType="#98858792-7437-4adc-b6fc-d75826886f7f"/>
+                    name="Lower Network Layers Protocols = Bluetooth 4.0 SPP ???"
+                    abstractType="#98858792-7437-4adc-b6fc-d75826886f7f"/>
                 <ownedFeatures xsi:type="org.polarsys.capella.core.data.cs:Part" id="cca960d7-55bf-4bd5-94ce-a29e2ccaad02"
-                    name="Protocolo ???" abstractType="#c8636cc8-e223-4150-ab68-68a704ed4f21"/>
+                    name="Application Layer Protocol = ELM327 OBD-II ???" abstractType="#c8636cc8-e223-4150-ab68-68a704ed4f21"/>
                 <ownedConfigurationItems xsi:type="org.polarsys.capella.core.data.epbs:ConfigurationItem"
-                    id="98858792-7437-4adc-b6fc-d75826886f7f" name="Bluetooth" kind="NDICI"/>
+                    id="98858792-7437-4adc-b6fc-d75826886f7f" name="Lower Network Layers Protocols = Bluetooth 4.0 SPP ???"
+                    kind="NDICI"/>
                 <ownedConfigurationItems xsi:type="org.polarsys.capella.core.data.epbs:ConfigurationItem"
-                    id="c8636cc8-e223-4150-ab68-68a704ed4f21" name="Protocolo ???"
+                    id="c8636cc8-e223-4150-ab68-68a704ed4f21" name="Application Layer Protocol = ELM327 OBD-II ???"
                     kind="NDICI"/>
                 <ownedPhysicalArtifactRealizations xsi:type="org.polarsys.capella.core.data.epbs:PhysicalArtifactRealization"
                     id="9da815d6-25aa-49a0-8f87-f4c4123377b4" targetElement="#d8904584-d2dc-454b-8c9a-6d0bc18258e9"
                     sourceElement="#a017ed41-5b57-4c92-ac94-21635d6ee6d6"/>
-              </ownedConfigurationItems>
-              <ownedConfigurationItems xsi:type="org.polarsys.capella.core.data.epbs:ConfigurationItem"
-                  id="87f5ceed-8dfe-407c-92b6-47cb17a3582f" name="Veículo &lt;> Scanner"
-                  kind="PrimeItemCI">
-                <ownedFeatures xsi:type="org.polarsys.capella.core.data.cs:Part" id="439f6b9a-c1eb-47a9-b563-26b79bb820fd"
-                    name="(conexão física) ???" abstractType="#37822441-cb4c-46b4-9243-13fae27e301a"/>
-                <ownedConfigurationItems xsi:type="org.polarsys.capella.core.data.epbs:ConfigurationItem"
-                    id="37822441-cb4c-46b4-9243-13fae27e301a" name="(conexão física) ???"
-                    kind="COTSCI"/>
-                <ownedPhysicalArtifactRealizations xsi:type="org.polarsys.capella.core.data.epbs:PhysicalArtifactRealization"
-                    id="a9ef6c29-16ab-4e1a-a043-312c1b33f805" targetElement="#882ce935-ae86-482e-9093-d58468d012c9"
-                    sourceElement="#87f5ceed-8dfe-407c-92b6-47cb17a3582f"/>
               </ownedConfigurationItems>
               <ownedPhysicalArtifactRealizations xsi:type="org.polarsys.capella.core.data.epbs:PhysicalArtifactRealization"
                   id="22d19e0e-79a3-4b13-a74e-abe9ed758854" targetElement="#9fe03544-d112-4889-ac81-3532b6811536"
@@ -1263,6 +1262,33 @@
             <ownedConfigurationItems xsi:type="org.polarsys.capella.core.data.epbs:ConfigurationItem"
                 id="0987f5d1-bbb6-4125-9bb9-5c4297ab5da8" name="Cloud-Hosted Backend"
                 kind="PrimeItemCI">
+              <ownedFeatures xsi:type="org.polarsys.capella.core.data.cs:Part" id="eb19a15c-b0a2-4027-9370-4d4386eb2561"
+                  name="Cloud Hosting Solution ???" abstractType="#d60226de-dbd4-4738-8365-91c30cb868e7"/>
+              <ownedConfigurationItems xsi:type="org.polarsys.capella.core.data.epbs:ConfigurationItem"
+                  id="d60226de-dbd4-4738-8365-91c30cb868e7" name="Cloud Hosting Solution ???"
+                  kind="COTSCI">
+                <ownedFeatures xsi:type="org.polarsys.capella.core.data.cs:Part" id="b1e02af4-791a-4b7f-b2c9-97d87b50dfea"
+                    name="Hosting Configuration" abstractType="#2fccdecf-6d98-43a8-b75a-045ee93a558c"/>
+                <ownedFeatures xsi:type="org.polarsys.capella.core.data.cs:Part" id="e6bbe876-3cb4-48bc-8c4e-a5ddedf49aa7"
+                    name="Backend Software" abstractType="#046881a9-2875-42de-b2ca-40f50cde1492"/>
+                <ownedConfigurationItems xsi:type="org.polarsys.capella.core.data.epbs:ConfigurationItem"
+                    id="2fccdecf-6d98-43a8-b75a-045ee93a558c" name="Hosting Configuration"
+                    kind="CSCI">
+                  <ownedPhysicalArtifactRealizations xsi:type="org.polarsys.capella.core.data.epbs:PhysicalArtifactRealization"
+                      id="a2cc683d-99b8-4bc7-80a4-2bbb770ba5f2" targetElement="#09e88693-787b-4f5a-9a12-74dd6b0eaa7f"
+                      sourceElement="#2fccdecf-6d98-43a8-b75a-045ee93a558c"/>
+                </ownedConfigurationItems>
+                <ownedConfigurationItems xsi:type="org.polarsys.capella.core.data.epbs:ConfigurationItem"
+                    id="046881a9-2875-42de-b2ca-40f50cde1492" name="Backend Software"
+                    kind="CSCI">
+                  <ownedPhysicalArtifactRealizations xsi:type="org.polarsys.capella.core.data.epbs:PhysicalArtifactRealization"
+                      id="3777e265-a163-48ad-b598-18ca19eecc88" targetElement="#688f7a8b-2040-4f99-a0f2-a30404bad7e1"
+                      sourceElement="#046881a9-2875-42de-b2ca-40f50cde1492"/>
+                </ownedConfigurationItems>
+                <ownedPhysicalArtifactRealizations xsi:type="org.polarsys.capella.core.data.epbs:PhysicalArtifactRealization"
+                    id="62672c33-718e-4b3a-ad90-983646721e83" targetElement="#09e88693-787b-4f5a-9a12-74dd6b0eaa7f"
+                    sourceElement="#d60226de-dbd4-4738-8365-91c30cb868e7"/>
+              </ownedConfigurationItems>
               <ownedPhysicalArtifactRealizations xsi:type="org.polarsys.capella.core.data.epbs:PhysicalArtifactRealization"
                   id="2d417a5a-02f5-45bc-9331-b980edd40ba2" targetElement="#09e88693-787b-4f5a-9a12-74dd6b0eaa7f"
                   sourceElement="#0987f5d1-bbb6-4125-9bb9-5c4297ab5da8"/>
@@ -1270,10 +1296,52 @@
             <ownedConfigurationItems xsi:type="org.polarsys.capella.core.data.epbs:ConfigurationItem"
                 id="8b3baec3-1b55-4399-ac7a-c6e20139aef0" name="Cloud-Hosted Web Client"
                 kind="PrimeItemCI">
+              <ownedFeatures xsi:type="org.polarsys.capella.core.data.cs:Part" id="d0fff6dd-526e-4566-a98e-09d29a47e6ef"
+                  name="Cloud Hosting Solution ???" abstractType="#e1107b60-bf77-4d1f-965b-802364b6010f"/>
+              <ownedConfigurationItems xsi:type="org.polarsys.capella.core.data.epbs:ConfigurationItem"
+                  id="e1107b60-bf77-4d1f-965b-802364b6010f" name="Cloud Hosting Solution ???"
+                  kind="COTSCI">
+                <ownedFeatures xsi:type="org.polarsys.capella.core.data.cs:Part" id="39b17b1b-0859-45c1-afff-e8fcedd662e1"
+                    name="Client Software" abstractType="#977e7139-d60a-4133-98b7-d1b3a15bf411"/>
+                <ownedFeatures xsi:type="org.polarsys.capella.core.data.cs:Part" id="7b881a36-4261-427d-af55-2f5938b5a134"
+                    name="Hosting Configuration" abstractType="#37fb04d3-f7ba-4f5c-b7fa-a1bd12487b20"/>
+                <ownedConfigurationItems xsi:type="org.polarsys.capella.core.data.epbs:ConfigurationItem"
+                    id="977e7139-d60a-4133-98b7-d1b3a15bf411" name="Client Software"
+                    kind="CSCI">
+                  <ownedPhysicalArtifactRealizations xsi:type="org.polarsys.capella.core.data.epbs:PhysicalArtifactRealization"
+                      id="f5d9046a-a006-4170-a57e-c3f6d9294c76" targetElement="#72fd4b1b-9564-46d9-bf62-854ada0025dc"
+                      sourceElement="#977e7139-d60a-4133-98b7-d1b3a15bf411"/>
+                </ownedConfigurationItems>
+                <ownedConfigurationItems xsi:type="org.polarsys.capella.core.data.epbs:ConfigurationItem"
+                    id="37fb04d3-f7ba-4f5c-b7fa-a1bd12487b20" name="Hosting Configuration"
+                    kind="CSCI">
+                  <ownedPhysicalArtifactRealizations xsi:type="org.polarsys.capella.core.data.epbs:PhysicalArtifactRealization"
+                      id="c8cbd61a-7bf3-441d-b5dc-dda88b050af7" targetElement="#fde9f9a3-f6ad-45bc-9350-9cd73e26bd3f"
+                      sourceElement="#37fb04d3-f7ba-4f5c-b7fa-a1bd12487b20"/>
+                </ownedConfigurationItems>
+                <ownedPhysicalArtifactRealizations xsi:type="org.polarsys.capella.core.data.epbs:PhysicalArtifactRealization"
+                    id="ff8a31fa-bb83-46c7-92b9-f6977e27cc3c" targetElement="#fde9f9a3-f6ad-45bc-9350-9cd73e26bd3f"
+                    sourceElement="#e1107b60-bf77-4d1f-965b-802364b6010f"/>
+              </ownedConfigurationItems>
               <ownedPhysicalArtifactRealizations xsi:type="org.polarsys.capella.core.data.epbs:PhysicalArtifactRealization"
                   id="a5634040-960a-4b8d-9559-3ca749a8bdee" targetElement="#fde9f9a3-f6ad-45bc-9350-9cd73e26bd3f"
                   sourceElement="#8b3baec3-1b55-4399-ac7a-c6e20139aef0"/>
             </ownedConfigurationItems>
+            <ownedConfigurationItems xsi:type="org.polarsys.capella.core.data.epbs:ConfigurationItem"
+                id="87f5ceed-8dfe-407c-92b6-47cb17a3582f" name="Veículo &lt;> Scanner"
+                kind="PrimeItemCI">
+              <ownedFeatures xsi:type="org.polarsys.capella.core.data.cs:Part" id="439f6b9a-c1eb-47a9-b563-26b79bb820fd"
+                  name="(conexão física) ???" abstractType="#37822441-cb4c-46b4-9243-13fae27e301a"/>
+              <ownedConfigurationItems xsi:type="org.polarsys.capella.core.data.epbs:ConfigurationItem"
+                  id="37822441-cb4c-46b4-9243-13fae27e301a" name="(conexão física) ???"
+                  kind="COTSCI"/>
+              <ownedPhysicalArtifactRealizations xsi:type="org.polarsys.capella.core.data.epbs:PhysicalArtifactRealization"
+                  id="a9ef6c29-16ab-4e1a-a043-312c1b33f805" targetElement="#882ce935-ae86-482e-9093-d58468d012c9"
+                  sourceElement="#87f5ceed-8dfe-407c-92b6-47cb17a3582f"/>
+            </ownedConfigurationItems>
+            <ownedConfigurationItems xsi:type="org.polarsys.capella.core.data.epbs:ConfigurationItem"
+                id="498dbb76-0127-4163-b160-0fa617c7ce8c" name="Application Layer Protocol para ESP32 &lt;> Backend"
+                kind="NDICI"/>
             <ownedPhysicalArtifactRealizations xsi:type="org.polarsys.capella.core.data.epbs:PhysicalArtifactRealization"
                 id="720c752d-0d11-4793-affc-142f56eb4972" targetElement="#37c23504-a503-43a9-9467-6f36be56b546"
                 sourceElement="#5060fd27-9c9a-402f-b2e6-91afa9c12730"/>
