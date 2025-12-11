@@ -1,11 +1,11 @@
 from flask import Flask, render_template, request, jsonify
 import datetime
+from typing import Dict, Any
 
 app = Flask(__name__)
 
 # Dicionário global para armazenar o último dado recebido de CADA dispositivo
-# A chave será o ID do dispositivo (ex: "CAR_A", "ESP32_01")
-latest_data = {}
+latest_data: Dict[str, Dict[str, Any]] = {}
 
 @app.route('/')
 def index():
@@ -14,7 +14,7 @@ def index():
 
 @app.route('/data', methods=['POST'])
 def receive_data():
-    """Endpoint para o ESP32 enviar dados via HTTP POST. Agora espera um 'device_id'."""
+    """Endpoint para o ESP32 enviar dados via HTTP POST."""
     global latest_data
     
     # Verifica se o conteúdo é JSON
@@ -30,14 +30,31 @@ def receive_data():
         required_keys = ['rpm', 'speed', 'temp_motor', 'throttle_pos']
         if all(key in data for key in required_keys):
             
-            # Armazena os dados
-            latest_data[device_id] = {
+            # Cria uma cópia de todos os dados recebidos
+            device_data = {
                 "rpm": data['rpm'],
                 "speed": data['speed'],
                 "temp_motor": data['temp_motor'],
                 "throttle_pos": data['throttle_pos'],
                 "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             }
+            
+            # Adiciona campos opcionais se existirem
+            optional_keys = ['voltage', 'gear', 'fuel_level']
+            for key in optional_keys:
+                if key in data:
+                    device_data[key] = data[key]
+                else:
+                    # Define valores padrão para campos ausentes
+                    if key == 'voltage':
+                        device_data[key] = 0.0
+                    elif key == 'gear':
+                        device_data[key] = 0
+                    elif key == 'fuel_level':
+                        device_data[key] = 0.0
+            
+            # Armazena os dados
+            latest_data[device_id] = device_data
             
             print(f"Dados recebidos de {device_id}: {latest_data[device_id]}")
             return jsonify({"status": "success", "message": f"Data received from {device_id}"}), 200
@@ -49,6 +66,15 @@ def receive_data():
 @app.route('/latest', methods=['GET'])
 def get_latest_data():
     """Endpoint para o frontend buscar os dados de TODOS os dispositivos."""
+    # Garante que todos os dispositivos tenham todos os campos
+    for device_id, data in latest_data.items():
+        if 'voltage' not in data:
+            data['voltage'] = 0.0
+        if 'gear' not in data:
+            data['gear'] = 0
+        if 'fuel_level' not in data:
+            data['fuel_level'] = 0.0
+    
     # Retorna o dicionário completo de dados
     return jsonify(latest_data), 200
 
