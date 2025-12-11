@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Multi-ECU Local</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #007bff;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        #dashboard-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .device-card {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            transition: transform 0.3s ease-in-out;
+        }
+        .device-card:hover {
+            transform: translateY(-5px);
+        }
+        .device-card h2 {
+            margin-top: 0;
+            color: #495057;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+            text-align: center;
+        }
+        .data-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px dashed #ccc;
+        }
+        .data-item:last-child {
+            border-bottom: none;
+        }
+        .label {
+            font-weight: bold;
+            color: #6c757d;
+        }
+        .value {
+            color: #28a745;
+            font-weight: bold;
+        }
+        .timestamp {
+            margin-top: 15px;
+            font-size: 0.8em;
+            color: #6c757d;
+            text-align: center;
+        }
+        .status {
+            text-align: center;
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 4px;
+            background-color: #ffeeba;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+    <h1>Dashboard de Monitoramento Multi-ECU</h1>
+    
+    <div class="status" id="global-status">Aguardando dados dos dispositivos...</div>
+
+    <div id="dashboard-container">
+        <!-- Cards dos dispositivos serão inseridos aqui pelo JavaScript -->
+    </div>
+
+    <script>
+        const container = document.getElementById('dashboard-container');
+        const globalStatus = document.getElementById('global-status');
+
+        // Função para criar o HTML de um card de dispositivo
+        function createDeviceCard(deviceId, data) {
+            return `
+                <div class="device-card" id="card-${deviceId}">
+                    <h2>ECU: ${deviceId}</h2>
+                    <div class="data-item">
+                        <span class="label">RPM:</span>
+                        <span class="value">${data.rpm}</span>
+                    </div>
+                    <div class="data-item">
+                        <span class="label">Velocidade:</span>
+                        <span class="value">${data.speed} km/h</span>
+                    </div>
+                    <div class="data-item">
+                        <span class="label">Temp. Motor:</span>
+                        <span class="value">${data.temp_motor} °C</span>
+                    </div>
+                    <div class="data-item">
+                        <span class="label">Acelerador:</span>
+                        <span class="value">${data.throttle_pos} %</span>
+                    </div>
+                    <p class="timestamp">Última Atualização: ${data.timestamp}</p>
+                </div>
+            `;
+        }
+
+        // Função para buscar os dados do servidor
+        function fetchData() {
+            fetch('/latest')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Erro ao buscar dados: ' + response.statusText);
+                    }
+                    return response.json();
+                })
+                .then(allData => {
+                    if (Object.keys(allData).length === 0) {
+                        globalStatus.textContent = 'Nenhum dispositivo conectado ou enviando dados.';
+                        globalStatus.style.backgroundColor = '#ffeeba';
+                        globalStatus.style.color = '#856404';
+                        container.innerHTML = ''; // Limpa o container se não houver dados
+                        return;
+                    }
+
+                    globalStatus.textContent = `Dados de ${Object.keys(allData).length} ECU(s) atualizados.`;
+                    globalStatus.style.backgroundColor = '#d4edda';
+                    globalStatus.style.color = '#155724';
+                    
+                    // Itera sobre os dados de todos os dispositivos
+                    Object.keys(allData).forEach(deviceId => {
+                        const data = allData[deviceId];
+                        let card = document.getElementById(`card-${deviceId}`);
+
+                        if (!card) {
+                            // Se o card não existe, cria e insere no container
+                            container.insertAdjacentHTML('beforeend', createDeviceCard(deviceId, data));
+                        } else {
+                            // Se o card existe, atualiza os valores
+                            card.querySelector('.data-item:nth-child(2) .value').textContent = data.rpm;
+                            card.querySelector('.data-item:nth-child(3) .value').textContent = data.speed + ' km/h';
+                            card.querySelector('.data-item:nth-child(4) .value').textContent = data.temp_motor + ' °C';
+                            card.querySelector('.data-item:nth-child(5) .value').textContent = data.throttle_pos + ' %';
+                            card.querySelector('.timestamp').textContent = 'Última Atualização: ' + data.timestamp;
+                        }
+                    });
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                    globalStatus.textContent = 'Erro ao conectar ou buscar dados: ' + error.message;
+                    globalStatus.style.backgroundColor = '#f8d7da';
+                    globalStatus.style.color = '#721c24';
+                });
+        }
+
+        // Busca os dados a cada 2 segundos
+        setInterval(fetchData, 2000); 
+        
+        // Chama a função uma vez para carregar os dados iniciais
+        fetchData();
+    </script>
+</body>
+</html>
