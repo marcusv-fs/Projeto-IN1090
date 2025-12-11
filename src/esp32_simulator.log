@@ -1,0 +1,18 @@
+2025-12-11 17:37:08,675 - INFO - Dispositivo Truck_001 inicializado (Sedan)
+2025-12-11 17:37:08,676 - INFO - Dispositivo Truck_002 inicializado (Hatch)
+2025-12-11 17:37:08,676 - INFO - Dispositivo Truck_003 inicializado (SUV)
+2025-12-11 17:37:08,676 - INFO - Criados 3 dispositivos simulados
+2025-12-11 17:37:08,677 - INFO - ============================================================
+2025-12-11 17:37:08,677 - INFO - SIMULADOR ESP32 - INICIANDO
+2025-12-11 17:37:08,677 - INFO - Dispositivos: 3
+2025-12-11 17:37:08,677 - INFO - Intervalo: 2.0s
+2025-12-11 17:37:08,677 - INFO - Servidor: http://localhost:5000/data
+2025-12-11 17:37:08,678 - INFO - Duração: Indefinidas
+2025-12-11 17:37:08,678 - INFO - ============================================================
+2025-12-11 17:37:08,678 - INFO - Dispositivo Truck_001 iniciado. Intervalo: 2.0s
+2025-12-11 17:37:08,678 - INFO - Dispositivo Truck_001 iniciado na thread ESP32-Truck_001
+2025-12-11 17:37:08,679 - INFO - Dispositivo Truck_002 iniciado. Intervalo: 2.0s
+2025-12-11 17:37:08,679 - INFO - Dispositivo Truck_002 iniciado na thread ESP32-Truck_002
+2025-12-11 17:37:08,679 - INFO - Dispositivo Truck_003 iniciado. Intervalo: 2.0s
+2025-12-11 17:37:08,679 - INFO - Dispositivo Truck_003 iniciado na thread ESP32-Truck_003
+2025-12-11 17:37:08,679 - INFO - Todos os 3 dispositivos iniciados
