@@ -144,3 +144,70 @@ Simulação interrompida pelo usuário
 2025-12-11 17:03:43,031 - INFO - Monitor: 3/3 dispositivos ativos
 2025-12-11 17:03:53,032 - INFO - Monitor: 3/3 dispositivos ativos
 2025-12-11 17:04:03,033 - INFO - Monitor: 3/3 dispositivos ativos
+2025-12-11 17:04:13,034 - INFO - Monitor: 3/3 dispositivos ativos
+2025-12-11 17:04:23,035 - INFO - Monitor: 3/3 dispositivos ativos
+2025-12-11 17:04:33,035 - INFO - Monitor: 3/3 dispositivos ativos
+2025-12-11 17:04:37,165 - INFO - Truck_002: RPM=1174, Vel=74.5km/h, Temp=82°C, Comb=43.1%
+2025-12-11 17:04:37,216 - ERROR - Dispositivo Truck_002: Erro inesperado: Simulação de falha de conexão
+2025-12-11 17:04:39,005 - INFO - Truck_003: RPM=863, Vel=33.3km/h, Temp=85.8°C, Comb=95.1%
+2025-12-11 17:04:43,036 - INFO - Monitor: 3/3 dispositivos ativos
+2025-12-11 17:04:47,404 - INFO - Truck_002: RPM=1114, Vel=70.8km/h, Temp=82°C, Comb=43.1%
+2025-12-11 17:04:53,036 - INFO - Monitor: 3/3 dispositivos ativos
+2025-12-11 17:04:53,928 - INFO - Truck_001: RPM=1703, Vel=60.2km/h, Temp=86.5°C, Comb=74.4%
+2025-12-11 17:05:03,037 - INFO - Monitor: 3/3 dispositivos ativos
+2025-12-11 17:05:07,711 - INFO - Truck_002: RPM=1117, Vel=65.0km/h, Temp=82°C, Comb=43.1%
+2025-12-11 17:05:13,038 - INFO - Monitor: 3/3 dispositivos ativos
+2025-12-11 17:05:23,039 - INFO - Monitor: 3/3 dispositivos ativos
+2025-12-11 17:05:33,040 - INFO - Monitor: 3/3 dispositivos ativos
+2025-12-11 17:05:36,236 - INFO - Truck_002: RPM=1085, Vel=63.9km/h, Temp=82°C, Comb=43.1%
+2025-12-11 17:05:38,676 - INFO - Truck_001: RPM=1786, Vel=65.3km/h, Temp=85°C, Comb=74.4%
+2025-12-11 17:05:43,041 - INFO - Monitor: 3/3 dispositivos ativos
+2025-12-11 17:05:53,041 - INFO - Monitor: 3/3 dispositivos ativos
+2025-12-11 17:05:59,042 - INFO - Truck_001: RPM=1716, Vel=61.4km/h, Temp=86.7°C, Comb=74.3%
+2025-12-11 17:06:00,477 - INFO - Truck_003: RPM=1224, Vel=40.8km/h, Temp=86.4°C, Comb=95.1%
+2025-12-11 17:06:03,042 - INFO - Monitor: 3/3 dispositivos ativos
+2025-12-11 17:06:13,042 - INFO - Monitor: 3/3 dispositivos ativos
+2025-12-11 17:06:17,036 - ERROR - Dispositivo Truck_002: Erro inesperado: Simulação de falha de conexão
+2025-12-11 17:06:20,333 - INFO - Monitoramento interrompido pelo usuário
+2025-12-11 17:06:23,570 - INFO - 
+Simulação interrompida pelo usuário
+2025-12-11 17:06:23,570 - INFO - Dispositivo Truck_001 parado
+2025-12-11 17:06:27,129 - INFO - Dispositivo Truck_002 parado
+2025-12-11 17:06:28,942 - INFO - Dispositivo Truck_003 parado
+2025-12-11 17:06:28,942 - INFO - Todos os dispositivos parados
+2025-12-11 17:06:28,942 - INFO - Simulação finalizada
+2025-12-11 17:16:26,582 - INFO - Dispositivo Truck_001 inicializado (Sedan)
+2025-12-11 17:16:26,583 - INFO - Dispositivo Truck_002 inicializado (Esportivo)
+2025-12-11 17:16:26,583 - INFO - Dispositivo Truck_003 inicializado (SUV)
+2025-12-11 17:16:26,583 - INFO - Criados 3 dispositivos simulados
+2025-12-11 17:16:26,583 - INFO - ============================================================
+2025-12-11 17:16:26,583 - INFO - SIMULADOR ESP32 - INICIANDO
+2025-12-11 17:16:26,583 - INFO - Dispositivos: 3
+2025-12-11 17:16:26,583 - INFO - Intervalo: 2.0s
+2025-12-11 17:16:26,584 - INFO - Servidor: http://localhost:5000/data
+2025-12-11 17:16:26,584 - INFO - Duração: Indefinidas
+2025-12-11 17:16:26,584 - INFO - ============================================================
+2025-12-11 17:16:26,585 - INFO - Dispositivo Truck_001 iniciado. Intervalo: 2.0s
+2025-12-11 17:16:26,585 - INFO - Dispositivo Truck_001 iniciado na thread ESP32-Truck_001
+2025-12-11 17:16:26,586 - INFO - Dispositivo Truck_002 iniciado. Intervalo: 2.0s
+2025-12-11 17:16:26,586 - INFO - Dispositivo Truck_002 iniciado na thread ESP32-Truck_002
+2025-12-11 17:16:26,586 - INFO - Dispositivo Truck_003 iniciado. Intervalo: 2.0s
+2025-12-11 17:16:26,586 - INFO - Dispositivo Truck_003 iniciado na thread ESP32-Truck_003
+2025-12-11 17:16:26,587 - INFO - Todos os 3 dispositivos iniciados
+2025-12-11 17:16:36,587 - INFO - Monitor: 3/3 dispositivos ativos
+2025-12-11 17:16:46,588 - INFO - Monitor: 3/3 dispositivos ativos
+2025-12-11 17:16:56,589 - INFO - Monitor: 3/3 dispositivos ativos
+2025-12-11 17:16:59,096 - INFO - Truck_003: RPM=900, Vel=55.5km/h, Temp=88°C, Comb=51.6%
+2025-12-11 17:17:06,592 - INFO - Monitor: 3/3 dispositivos ativos
+2025-12-11 17:17:12,252 - INFO - Monitoramento interrompido pelo usuário
+2025-12-11 17:17:15,437 - INFO - Dispositivo Truck_001 parado
+2025-12-11 17:17:15,483 - INFO - Dispositivo Truck_002 parado
+2025-12-11 17:17:19,353 - INFO - Dispositivo Truck_003 parado
+2025-12-11 17:17:19,353 - INFO - Todos os dispositivos parados
+2025-12-11 17:17:19,354 - INFO - Dispositivo Truck_001 parado
+2025-12-11 17:17:19,354 - INFO - Dispositivo Truck_002 parado
+2025-12-11 17:17:19,354 - INFO - Dispositivo Truck_003 parado
+2025-12-11 17:17:19,354 - INFO - Todos os dispositivos parados
+2025-12-11 17:17:19,354 - INFO - Simulação finalizada
+2025-12-11 17:17:43,334 - INFO - Dispositivo Truck_001 inicializado (Pickup)
+2025-12-11 17:17:43,335 - INFO - Dispositivo Truck_002 inicializado (Hatch)

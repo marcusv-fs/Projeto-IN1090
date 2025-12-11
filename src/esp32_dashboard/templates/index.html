@@ -3,16 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Multi-ECU Local - Telemetria Avançada</title>
+    <title>Dashboard Multi-ECU com Monitoramento de Conexão</title>
     <style>
         :root {
-            --primary: #007bff;
-            --success: #28a745;
-            --warning: #ffc107;
-            --danger: #dc3545;
-            --info: #17a2b8;
-            --dark: #343a40;
-            --light: #f8f9fa;
+            --connected-color: #28a745;
+            --disconnected-color: #dc3545;
+            --warning-color: #ffc107;
+            --primary-color: #007bff;
+            --dark-color: #343a40;
+            --light-color: #f8f9fa;
         }
         
         body {
@@ -39,46 +38,48 @@
         }
         
         h1 {
-            color: var(--dark);
+            color: var(--dark-color);
             margin: 0;
             font-size: 2.5rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
         
-        .subtitle {
-            color: #6c757d;
-            font-size: 1.1rem;
-            margin-top: 10px;
+        .connection-summary {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+            flex-wrap: wrap;
         }
         
-        #global-status {
-            text-align: center;
-            margin: 20px auto;
-            padding: 15px;
+        .summary-card {
+            background: white;
+            padding: 15px 25px;
             border-radius: 10px;
-            font-weight: bold;
-            max-width: 800px;
-            transition: all 0.3s ease;
-            background: rgba(255, 255, 255, 0.9);
+            text-align: center;
+            min-width: 150px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
         
-        .status-connected {
-            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
-            color: #155724;
-            border-left: 5px solid var(--success);
+        .summary-card.connected {
+            border-left: 5px solid var(--connected-color);
         }
         
-        .status-waiting {
-            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
-            color: #856404;
-            border-left: 5px solid var(--warning);
+        .summary-card.disconnected {
+            border-left: 5px solid var(--disconnected-color);
         }
         
-        .status-error {
-            background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
-            color: #721c24;
-            border-left: 5px solid var(--danger);
+        .summary-value {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 5px 0;
+        }
+        
+        .connected .summary-value {
+            color: var(--connected-color);
+        }
+        
+        .disconnected .summary-value {
+            color: var(--disconnected-color);
         }
         
         #dashboard-container {
@@ -96,43 +97,89 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-            border-top: 5px solid var(--primary);
+        }
+        
+        .device-card.connected {
+            border-top: 5px solid var(--connected-color);
+        }
+        
+        .device-card.disconnected {
+            border-top: 5px solid var(--disconnected-color);
+            opacity: 0.8;
+            background: linear-gradient(145deg, #f8f9fa, #e9ecef);
         }
         
         .device-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-5px);
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
         }
         
-        .device-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 5px;
-            background: linear-gradient(90deg, var(--primary), var(--info));
-        }
-        
-        .device-card h2 {
-            margin-top: 0;
-            color: var(--dark);
-            padding-bottom: 15px;
-            border-bottom: 2px solid #e9ecef;
-            text-align: center;
-            font-size: 1.5rem;
+        .device-header {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            gap: 10px;
+            margin-bottom: 15px;
         }
         
         .device-id {
-            background: var(--primary);
-            color: white;
-            padding: 3px 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--dark-color);
+        }
+        
+        .connection-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 5px 15px;
             border-radius: 20px;
+            font-weight: 600;
             font-size: 0.9rem;
+        }
+        
+        .connection-indicator.connected {
+            background: rgba(40, 167, 69, 0.1);
+            color: var(--connected-color);
+        }
+        
+        .connection-indicator.disconnected {
+            background: rgba(220, 53, 69, 0.1);
+            color: var(--disconnected-color);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 0.7; }
+            50% { opacity: 1; }
+            100% { opacity: 0.7; }
+        }
+        
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        
+        .status-dot.connected {
+            background: var(--connected-color);
+            animation: blink 2s infinite;
+        }
+        
+        .status-dot.disconnected {
+            background: var(--disconnected-color);
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .last-seen {
+            font-size: 0.8rem;
+            color: #6c757d;
+            text-align: right;
+            margin-top: 5px;
         }
         
         .data-grid {
@@ -147,11 +194,6 @@
             padding: 15px;
             border-radius: 10px;
             box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-            transition: all 0.2s ease;
-        }
-        
-        .data-item:hover {
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
         
         .data-label {
@@ -167,7 +209,11 @@
         .data-value {
             font-size: 1.5rem;
             font-weight: 700;
-            color: var(--dark);
+            color: var(--dark-color);
+        }
+        
+        .disconnected .data-value {
+            color: #6c757d !important;
         }
         
         .unit {
@@ -176,16 +222,48 @@
             margin-left: 3px;
         }
         
-        .rpm { color: var(--danger); }
-        .speed { color: var(--primary); }
-        .temp { color: var(--warning); }
-        .throttle { color: var(--success); }
-        .voltage { color: var(--info); }
-        .gear { color: #6f42c1; }
-        .fuel { color: #20c997; }
+        .rpm { color: #dc3545; }
+        .speed { color: #007bff; }
+        .temp { color: #fd7e14; }
+        .throttle { color: #28a745; }
+        .voltage { color: #6f42c1; }
+        .gear { color: #20c997; }
+        .fuel { color: #17a2b8; }
+        
+        .disconnected-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            border-radius: 15px;
+        }
+        
+        .disconnected-message {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .disconnected-icon {
+            font-size: 3rem;
+            color: var(--disconnected-color);
+            margin-bottom: 15px;
+        }
+        
+        .disconnected-title {
+            font-size: 1.5rem;
+            color: var(--disconnected-color);
+            margin-bottom: 10px;
+        }
         
         .timestamp {
-            margin-top: 20px;
+            margin-top: 15px;
             font-size: 0.8rem;
             color: #6c757d;
             text-align: center;
@@ -193,103 +271,37 @@
             border-top: 1px dashed #dee2e6;
         }
         
-        .icon {
-            font-size: 1.2rem;
+        .auto-refresh-control {
+            text-align: center;
+            margin: 20px 0;
         }
         
-        .value-container {
-            display: flex;
-            align-items: baseline;
-            justify-content: space-between;
-        }
-        
-        .progress-bar {
-            height: 8px;
-            background: #e9ecef;
-            border-radius: 4px;
-            margin-top: 8px;
-            overflow: hidden;
-        }
-        
-        .progress-fill {
-            height: 100%;
-            border-radius: 4px;
-            transition: width 0.5s ease;
-        }
-        
-        .progress-rpm { background: linear-gradient(90deg, var(--success), var(--warning), var(--danger)); }
-        .progress-temp { background: linear-gradient(90deg, var(--info), var(--warning), var(--danger)); }
-        .progress-fuel { background: linear-gradient(90deg, var(--danger), var(--warning), var(--success)); }
-        .progress-throttle { background: linear-gradient(90deg, var(--success), var(--warning)); }
-        
-        .data-critical .data-value {
-            animation: pulse 1.5s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.7; }
-            100% { opacity: 1; }
-        }
-        
-        .last-update {
-            font-size: 0.8rem;
-            color: #6c757d;
-            text-align: right;
-            margin-bottom: 5px;
-        }
-        
-        .device-status {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-top: 15px;
-            padding: 8px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            background: rgba(0, 123, 255, 0.1);
-        }
-        
-        .status-indicator {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: var(--success);
-            animation: blink 2s infinite;
-        }
-        
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-        
-        .controls {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 30px;
-        }
-        
-        .control-btn {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 50px;
+        .refresh-btn {
             background: white;
-            color: var(--primary);
-            font-weight: 600;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
         }
         
-        .control-btn:hover {
+        .refresh-btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 20px rgba(0,0,0,0.15);
         }
         
-        .control-btn:active {
-            transform: translateY(0);
+        .fa-spin {
+            animation: fa-spin 1s infinite linear;
+        }
+        
+        @keyframes fa-spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
         
         @media (max-width: 768px) {
@@ -297,12 +309,14 @@
                 grid-template-columns: 1fr;
             }
             
-            .data-grid {
-                grid-template-columns: 1fr;
+            .connection-summary {
+                flex-direction: column;
+                align-items: center;
             }
             
-            h1 {
-                font-size: 2rem;
+            .summary-card {
+                width: 100%;
+                max-width: 300px;
             }
         }
     </style>
@@ -311,21 +325,38 @@
 <body>
     <div class="container">
         <header>
-            <h1><i class="fas fa-car-alt"></i> Dashboard de Telemetria Multi-ECU</h1>
-            <div class="subtitle">Monitoramento em tempo real de veículos conectados</div>
+            <h1><i class="fas fa-car"></i> Dashboard Telemetria Multi-ECU</h1>
+            <p>Monitoramento em tempo real com verificação de conexão</p>
+            
+            <div class="connection-summary">
+                <div class="summary-card connected" id="connected-count">
+                    <div class="summary-label">Conectados</div>
+                    <div class="summary-value">0</div>
+                    <div class="summary-desc">Veículos ativos</div>
+                </div>
+                
+                <div class="summary-card disconnected" id="disconnected-count">
+                    <div class="summary-label">Desconectados</div>
+                    <div class="summary-value">0</div>
+                    <div class="summary-desc">Sem comunicação</div>
+                </div>
+                
+                <div class="summary-card" id="total-count">
+                    <div class="summary-label">Total</div>
+                    <div class="summary-value">0</div>
+                    <div class="summary-desc">Dispositivos monitorados</div>
+                </div>
+            </div>
         </header>
         
-        <div id="global-status" class="status-waiting">
-            <i class="fas fa-sync-alt fa-spin"></i> Aguardando dados dos dispositivos...
-        </div>
-        
-        <div class="controls">
-            <button class="control-btn" onclick="toggleRefresh()">
-                <i class="fas fa-pause" id="refresh-icon"></i> <span id="refresh-text">Pausar Atualização</span>
+        <div class="auto-refresh-control">
+            <button class="refresh-btn" onclick="toggleAutoRefresh()">
+                <i class="fas fa-sync-alt" id="refresh-icon"></i>
+                <span id="refresh-text">Atualização Automática: Ligado</span>
             </button>
-            <button class="control-btn" onclick="clearDashboard()">
-                <i class="fas fa-trash-alt"></i> Limpar Dashboard
-            </button>
+            <div style="margin-top: 10px; font-size: 0.9rem; color: #6c757d;">
+                Status atualizado a cada 2 segundos • Timeout: 15 segundos
+            </div>
         </div>
         
         <div id="dashboard-container">
@@ -337,48 +368,70 @@
         let autoRefresh = true;
         let refreshInterval;
         const container = document.getElementById('dashboard-container');
-        const globalStatus = document.getElementById('global-status');
-        const deviceDataCache = {};
+        const CONNECTION_TIMEOUT = 15; // Segundos - deve corresponder ao servidor
         
-        // Função para criar o HTML de um card de dispositivo
-        function createDeviceCard(deviceId, data) {
-            // Determinar classe crítica baseada nos valores
-            const rpmCritical = data.rpm > 6000 ? 'data-critical' : '';
-            const tempCritical = data.temp_motor > 100 ? 'data-critical' : '';
-            const voltageCritical = data.voltage < 11.5 || data.voltage > 14.5 ? 'data-critical' : '';
-            const fuelCritical = data.fuel_level < 15 ? 'data-critical' : '';
+        function updateSummaryCounts(devices) {
+            let connected = 0;
+            let disconnected = 0;
             
-            // Calcular porcentagens para as barras de progresso
-            const rpmPercent = Math.min(100, (data.rpm / 7000) * 100);
-            const tempPercent = Math.min(100, (data.temp_motor / 120) * 100);
-            const fuelPercent = data.fuel_level;
-            const throttlePercent = data.throttle_pos;
+            Object.values(devices).forEach(device => {
+                if (device.connection_status === 'connected') {
+                    connected++;
+                } else {
+                    disconnected++;
+                }
+            });
+            
+            document.getElementById('connected-count').querySelector('.summary-value').textContent = connected;
+            document.getElementById('disconnected-count').querySelector('.summary-value').textContent = disconnected;
+            document.getElementById('total-count').querySelector('.summary-value').textContent = connected + disconnected;
+        }
+        
+        function createDeviceCard(deviceId, data) {
+            const isConnected = data.connection_status === 'connected';
+            const connectionClass = isConnected ? 'connected' : 'disconnected';
+            const lastSeenText = data.last_seen_seconds ? `Visto há ${data.last_seen_seconds}s` : 'Nunca visto';
             
             return `
-                <div class="device-card" id="card-${deviceId}">
-                    <h2>
-                        <i class="fas fa-car"></i> 
-                        Veículo: <span class="device-id">${deviceId}</span>
-                    </h2>
-                    
-                    <div class="device-status">
-                        <div class="status-indicator"></div>
-                        <span>Conectado - Enviando dados</span>
-                        <div class="last-update">${formatTimeSince(data.timestamp)}</div>
+                <div class="device-card ${connectionClass}" id="card-${deviceId}">
+                    <div class="device-header">
+                        <div class="device-id">
+                            <i class="fas fa-car"></i> ${deviceId}
+                        </div>
+                        <div class="connection-indicator ${connectionClass}">
+                            <span class="status-dot ${connectionClass}"></span>
+                            ${isConnected ? 'CONECTADO' : 'DESCONECTADO'}
+                        </div>
                     </div>
                     
+                    <div class="last-seen">
+                        ${lastSeenText}
+                    </div>
+                    
+                    ${!isConnected ? `
+                    <div class="disconnected-overlay">
+                        <div class="disconnected-message">
+                            <div class="disconnected-icon">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div class="disconnected-title">VEÍCULO DESCONECTADO</div>
+                            <p>Sem comunicação há ${data.last_seen_seconds || '?'} segundos</p>
+                            <p style="font-size: 0.9rem; margin-top: 10px;">
+                                Última atualização:<br>
+                                ${data.timestamp || 'N/A'}
+                            </p>
+                        </div>
+                    </div>
+                    ` : ''}
+                    
                     <div class="data-grid">
-                        <!-- Coluna 1 -->
                         <div class="data-item">
                             <div class="data-label">
                                 <i class="fas fa-tachometer-alt"></i> RPM
                             </div>
-                            <div class="value-container ${rpmCritical}">
+                            <div class="value-container">
                                 <span class="data-value rpm">${data.rpm}</span>
                                 <span class="unit">RPM</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill progress-rpm" style="width: ${rpmPercent}%"></div>
                             </div>
                         </div>
                         
@@ -394,36 +447,29 @@
                         
                         <div class="data-item">
                             <div class="data-label">
-                                <i class="fas fa-thermometer-half"></i> Temp. Motor
+                                <i class="fas fa-thermometer-half"></i> Temperatura
                             </div>
-                            <div class="value-container ${tempCritical}">
+                            <div class="value-container">
                                 <span class="data-value temp">${data.temp_motor}</span>
                                 <span class="unit">°C</span>
                             </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill progress-temp" style="width: ${tempPercent}%"></div>
-                            </div>
                         </div>
                         
                         <div class="data-item">
                             <div class="data-label">
-                                <i class="fas fa-gas-pump"></i> Nível Combustível
+                                <i class="fas fa-gas-pump"></i> Combustível
                             </div>
-                            <div class="value-container ${fuelCritical}">
+                            <div class="value-container">
                                 <span class="data-value fuel">${data.fuel_level}</span>
                                 <span class="unit">%</span>
                             </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill progress-fuel" style="width: ${fuelPercent}%"></div>
-                            </div>
                         </div>
                         
-                        <!-- Coluna 2 -->
                         <div class="data-item">
                             <div class="data-label">
-                                <i class="fas fa-bolt"></i> Tensão Bateria
+                                <i class="fas fa-bolt"></i> Tensão
                             </div>
-                            <div class="value-container ${voltageCritical}">
+                            <div class="value-container">
                                 <span class="data-value voltage">${data.voltage}</span>
                                 <span class="unit">V</span>
                             </div>
@@ -441,48 +487,33 @@
                         
                         <div class="data-item">
                             <div class="data-label">
-                                <i class="fas fa-pedestal"></i> Pos. Acelerador
+                                <i class="fas fa-pedestal"></i> Acelerador
                             </div>
                             <div class="value-container">
                                 <span class="data-value throttle">${data.throttle_pos}</span>
                                 <span class="unit">%</span>
                             </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill progress-throttle" style="width: ${throttlePercent}%"></div>
-                            </div>
                         </div>
                         
                         <div class="data-item">
                             <div class="data-label">
-                                <i class="fas fa-microchip"></i> ID Dispositivo
+                                <i class="fas fa-clock"></i> Status
                             </div>
                             <div class="value-container">
-                                <span class="data-value" style="color: var(--dark);">${deviceId}</span>
+                                <span class="data-value" style="color: ${isConnected ? '#28a745' : '#dc3545'}">
+                                    ${isConnected ? 'Ativo' : 'Inativo'}
+                                </span>
                             </div>
                         </div>
                     </div>
                     
                     <div class="timestamp">
-                        <i class="far fa-clock"></i> Última Atualização: ${data.timestamp}
+                        <i class="far fa-clock"></i> Última atualização: ${data.timestamp}
                     </div>
                 </div>
             `;
         }
         
-        // Função para formatar o tempo desde a última atualização
-        function formatTimeSince(timestamp) {
-            const now = new Date();
-            const updateTime = new Date(timestamp);
-            const diffMs = now - updateTime;
-            const diffSec = Math.floor(diffMs / 1000);
-            
-            if (diffSec < 10) return 'Agora mesmo';
-            if (diffSec < 60) return `Há ${diffSec} segundos`;
-            if (diffSec < 3600) return `Há ${Math.floor(diffSec / 60)} minutos`;
-            return `Há ${Math.floor(diffSec / 3600)} horas`;
-        }
-        
-        // Função para buscar os dados do servidor
         function fetchData() {
             if (!autoRefresh) return;
             
@@ -495,159 +526,170 @@
                 })
                 .then(allData => {
                     if (Object.keys(allData).length === 0) {
-                        globalStatus.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Nenhum dispositivo conectado ou enviando dados.';
-                        globalStatus.className = 'status-waiting';
-                        container.innerHTML = ''; // Limpa o container se não houver dados
+                        container.innerHTML = `
+                            <div style="grid-column: 1 / -1; text-align: center; padding: 40px; background: white; border-radius: 15px;">
+                                <i class="fas fa-car" style="font-size: 3rem; color: #6c757d; margin-bottom: 20px;"></i>
+                                <h3>Nenhum dispositivo conectado</h3>
+                                <p>Aguardando dados dos veículos...</p>
+                            </div>
+                        `;
+                        
+                        updateSummaryCounts({});
                         return;
                     }
-
-                    const deviceCount = Object.keys(allData).length;
-                    const deviceText = deviceCount === 1 ? '1 dispositivo' : `${deviceCount} dispositivos`;
-                    globalStatus.innerHTML = `<i class="fas fa-check-circle"></i> Dados de ${deviceText} atualizados com sucesso.`;
-                    globalStatus.className = 'status-connected';
                     
-                    // Itera sobre os dados de todos os dispositivos
+                    // Atualiza contadores
+                    updateSummaryCounts(allData);
+                    
+                    // Atualiza ou cria cards
                     Object.keys(allData).forEach(deviceId => {
                         const data = allData[deviceId];
-                        
-                        // Garantir que os novos campos existam (para compatibilidade)
-                        if (!data.voltage) data.voltage = '--';
-                        if (!data.gear && data.gear !== 0) data.gear = '--';
-                        if (!data.fuel_level) data.fuel_level = '--';
-                        
-                        // Armazenar em cache para comparação
-                        const previousData = deviceDataCache[deviceId];
-                        deviceDataCache[deviceId] = data;
-                        
-                        let card = document.getElementById(`card-${deviceId}`);
+                        const cardId = `card-${deviceId}`;
+                        let card = document.getElementById(cardId);
                         
                         if (!card) {
-                            // Se o card não existe, cria e insere no container
                             container.insertAdjacentHTML('beforeend', createDeviceCard(deviceId, data));
-                            // Adicionar animação de entrada
-                            setTimeout(() => {
-                                const newCard = document.getElementById(`card-${deviceId}`);
-                                if (newCard) newCard.style.opacity = '1';
-                            }, 10);
                         } else {
-                            // Se o card existe, atualiza os valores apenas se mudaram
-                            updateIfChanged(card, '.data-value.rpm', data.rpm, 'RPM', previousData?.rpm);
-                            updateIfChanged(card, '.data-value.speed', data.speed, 'km/h', previousData?.speed);
-                            updateIfChanged(card, '.data-value.temp', data.temp_motor, '°C', previousData?.temp_motor);
-                            updateIfChanged(card, '.data-value.throttle', data.throttle_pos, '%', previousData?.throttle_pos);
-                            updateIfChanged(card, '.data-value.voltage', data.voltage, 'V', previousData?.voltage);
-                            updateIfChanged(card, '.data-value.gear', data.gear === 0 ? 'N' : data.gear, '', previousData?.gear);
-                            updateIfChanged(card, '.data-value.fuel', data.fuel_level, '%', previousData?.fuel_level);
-                            
-                            // Atualizar barras de progresso
-                            updateProgressBar(card, '.progress-rpm', Math.min(100, (data.rpm / 7000) * 100));
-                            updateProgressBar(card, '.progress-temp', Math.min(100, (data.temp_motor / 120) * 100));
-                            updateProgressBar(card, '.progress-fuel', data.fuel_level);
-                            updateProgressBar(card, '.progress-throttle', data.throttle_pos);
-                            
-                            // Atualizar timestamp
-                            card.querySelector('.last-update').textContent = formatTimeSince(data.timestamp);
-                            card.querySelector('.timestamp').innerHTML = `<i class="far fa-clock"></i> Última Atualização: ${data.timestamp}`;
-                            
-                            // Adicionar classe crítica se necessário
-                            updateCriticalStatus(card, '.data-value.rpm', data.rpm > 6000);
-                            updateCriticalStatus(card, '.data-value.temp', data.temp_motor > 100);
-                            updateCriticalStatus(card, '.data-value.voltage', data.voltage < 11.5 || data.voltage > 14.5);
-                            updateCriticalStatus(card, '.data-value.fuel', data.fuel_level < 15);
+                            // Atualiza o card existente
+                            updateDeviceCard(cardId, deviceId, data);
                         }
                     });
                     
-                    // Remover dispositivos que não estão mais ativos (se necessário)
-                    // Pode implementar lógica para remover após X tempo sem atualização
+                    // Remove dispositivos que não existem mais (se necessário)
+                    // Esta parte pode ser implementada se você quiser remover dispositivos antigos
                 })
                 .catch(error => {
-                    console.error('Erro:', error);
-                    globalStatus.innerHTML = `<i class="fas fa-exclamation-circle"></i> Erro ao conectar ou buscar dados: ${error.message}`;
-                    globalStatus.className = 'status-error';
+                    console.error('Erro ao buscar dados:', error);
                 });
         }
         
-        // Função auxiliar para atualizar apenas se o valor mudou
-        function updateIfChanged(card, selector, newValue, unit, oldValue) {
+        function updateDeviceCard(cardId, deviceId, data) {
+            const card = document.getElementById(cardId);
+            if (!card) return;
+            
+            const isConnected = data.connection_status === 'connected';
+            const connectionClass = isConnected ? 'connected' : 'disconnected';
+            
+            // Atualiza classes de conexão
+            card.className = `device-card ${connectionClass}`;
+            
+            // Atualiza indicador de conexão
+            const indicator = card.querySelector('.connection-indicator');
+            indicator.className = `connection-indicator ${connectionClass}`;
+            indicator.innerHTML = `
+                <span class="status-dot ${connectionClass}"></span>
+                ${isConnected ? 'CONECTADO' : 'DESCONECTADO'}
+            `;
+            
+            // Atualiza último visto
+            const lastSeen = card.querySelector('.last-seen');
+            if (lastSeen) {
+                lastSeen.textContent = data.last_seen_seconds ? 
+                    `Visto há ${data.last_seen_seconds}s` : 'Nunca visto';
+            }
+            
+            // Atualiza valores dos dados
+            updateIfChanged(card, '.data-value.rpm', data.rpm);
+            updateIfChanged(card, '.data-value.speed', data.speed);
+            updateIfChanged(card, '.data-value.temp', data.temp_motor);
+            updateIfChanged(card, '.data-value.throttle', data.throttle_pos);
+            updateIfChanged(card, '.data-value.voltage', data.voltage);
+            updateIfChanged(card, '.data-value.gear', data.gear === 0 ? 'N' : data.gear);
+            updateIfChanged(card, '.data-value.fuel', data.fuel_level);
+            
+            // Atualiza status
+            const statusElement = card.querySelector('.data-value[style*="color:"]');
+            if (statusElement) {
+                statusElement.style.color = isConnected ? '#28a745' : '#dc3545';
+                statusElement.textContent = isConnected ? 'Ativo' : 'Inativo';
+            }
+            
+            // Atualiza timestamp
+            const timestampElement = card.querySelector('.timestamp');
+            if (timestampElement) {
+                timestampElement.innerHTML = `<i class="far fa-clock"></i> Última atualização: ${data.timestamp}`;
+            }
+            
+            // Atualiza ou cria overlay de desconexão
+            let overlay = card.querySelector('.disconnected-overlay');
+            
+            if (!isConnected) {
+                if (!overlay) {
+                    card.insertAdjacentHTML('beforeend', `
+                        <div class="disconnected-overlay">
+                            <div class="disconnected-message">
+                                <div class="disconnected-icon">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </div>
+                                <div class="disconnected-title">VEÍCULO DESCONECTADO</div>
+                                <p>Sem comunicação há ${data.last_seen_seconds || '?'} segundos</p>
+                                <p style="font-size: 0.9rem; margin-top: 10px;">
+                                    Última atualização:<br>
+                                    ${data.timestamp || 'N/A'}
+                                </p>
+                            </div>
+                        </div>
+                    `);
+                } else {
+                    // Atualiza mensagem no overlay existente
+                    const message = overlay.querySelector('p');
+                    if (message) {
+                        message.textContent = `Sem comunicação há ${data.last_seen_seconds || '?'} segundos`;
+                    }
+                }
+            } else if (overlay) {
+                // Remove overlay se agora está conectado
+                overlay.remove();
+            }
+        }
+        
+        function updateIfChanged(card, selector, newValue) {
             const element = card.querySelector(selector);
-            if (element && newValue !== oldValue) {
-                // Adicionar animação de mudança
-                element.style.transform = 'scale(1.2)';
+            if (element && element.textContent !== String(newValue)) {
+                element.textContent = newValue;
+                
+                // Efeito visual de atualização
+                element.style.transform = 'scale(1.1)';
                 setTimeout(() => {
                     element.style.transform = 'scale(1)';
                 }, 300);
-                
-                element.textContent = newValue;
-                if (unit) {
-                    const unitElement = element.nextElementSibling;
-                    if (unitElement && unitElement.classList.contains('unit')) {
-                        unitElement.textContent = unit;
-                    }
-                }
             }
         }
         
-        // Função para atualizar barras de progresso
-        function updateProgressBar(card, selector, percent) {
-            const bar = card.querySelector(selector);
-            if (bar) {
-                bar.style.width = `${percent}%`;
-            }
-        }
-        
-        // Função para atualizar status crítico
-        function updateCriticalStatus(card, selector, isCritical) {
-            const element = card.querySelector(selector);
-            if (element) {
-                const container = element.closest('.value-container');
-                if (container) {
-                    if (isCritical) {
-                        container.classList.add('data-critical');
-                    } else {
-                        container.classList.remove('data-critical');
-                    }
-                }
-            }
-        }
-        
-        // Função para alternar atualização automática
-        function toggleRefresh() {
+        function toggleAutoRefresh() {
             autoRefresh = !autoRefresh;
             const icon = document.getElementById('refresh-icon');
             const text = document.getElementById('refresh-text');
             
             if (autoRefresh) {
-                icon.className = 'fas fa-pause';
-                text.textContent = 'Pausar Atualização';
-                globalStatus.innerHTML = '<i class="fas fa-sync-alt fa-spin"></i> Atualização retomada';
-                globalStatus.className = 'status-connected';
+                icon.className = 'fas fa-sync-alt';
+                text.textContent = 'Atualização Automática: Ligado';
+                startAutoRefresh();
             } else {
-                icon.className = 'fas fa-play';
-                text.textContent = 'Retomar Atualização';
-                globalStatus.innerHTML = '<i class="fas fa-pause"></i> Atualização pausada';
-                globalStatus.className = 'status-waiting';
+                icon.className = 'fas fa-sync-alt fa-spin';
+                text.textContent = 'Atualização Automática: Desligado';
+                clearInterval(refreshInterval);
             }
         }
         
-        // Função para limpar o dashboard
-        function clearDashboard() {
-            container.innerHTML = '';
-            Object.keys(deviceDataCache).forEach(key => delete deviceDataCache[key]);
-            globalStatus.innerHTML = '<i class="fas fa-trash-alt"></i> Dashboard limpo. Aguardando novos dados...';
-            globalStatus.className = 'status-waiting';
+        function startAutoRefresh() {
+            clearInterval(refreshInterval);
+            refreshInterval = setInterval(fetchData, 2000); // Atualiza a cada 2 segundos
+            fetchData(); // Primeira execução
         }
         
-        // Inicializar atualização automática
-        function init() {
-            // Busca os dados a cada 1 segundo
-            refreshInterval = setInterval(fetchData, 1000);
+        // Inicializa quando a página carrega
+        window.addEventListener('DOMContentLoaded', () => {
+            startAutoRefresh();
             
-            // Chama a função uma vez para carregar os dados iniciais
-            fetchData();
-        }
-        
-        // Iniciar quando a página carregar
-        window.addEventListener('DOMContentLoaded', init);
+            // Adiciona atalho de teclado (Espaço para pausar/retomar)
+            document.addEventListener('keydown', (e) => {
+                if (e.code === 'Space') {
+                    e.preventDefault();
+                    toggleAutoRefresh();
+                }
+            });
+        });
     </script>
 </body>
 </html>
