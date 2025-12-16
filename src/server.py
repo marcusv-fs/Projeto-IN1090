@@ -1,8 +1,10 @@
 from flask import Flask, render_template, request, jsonify
 import datetime
 from typing import Dict, Any
-from threading import Timer
+from threading import Timer, Event
 import time
+import signal
+import sys
 
 app = Flask(__name__)
 
@@ -15,8 +17,14 @@ last_seen: Dict[str, float] = {}
 # Tempo máximo sem comunicação para considerar desconectado (em segundos)
 CONNECTION_TIMEOUT = 15  # 15 segundos
 
+# Evento para controlar o shutdown da thread do timer
+shutdown_event = Event()
+
 def check_connection_status():
     """Função periódica para verificar status de conexão dos dispositivos"""
+    if shutdown_event.is_set():
+        return
+    
     current_time = time.time()
     for device_id in list(latest_data.keys()):
         if device_id in last_seen:
@@ -32,8 +40,45 @@ def check_connection_status():
                     if 'was_connected' not in latest_data[device_id]:
                         latest_data[device_id]['was_connected'] = True
     
-    # Agenda próxima verificação
-    Timer(1.0, check_connection_status).start()
+    # Agenda próxima verificação apenas se não estamos desligando
+    if not shutdown_event.is_set():
+        Timer(1.0, check_connection_status).start()
+
+def signal_handler(sig, frame):
+    """Manipula o sinal de interrupção (Ctrl+C)"""
+    print('\n\n⚠️  Encerrando servidor...')
+    
+    # Sinaliza o evento de shutdown
+    shutdown_event.set()
+    
+    # Limpa os timers
+    import atexit
+    atexit._clear()
+    
+    # Encerra o programa
+    print('✅ Servidor encerrado com sucesso.')
+    sys.exit(0)
+
+def remove_disconnected_devices():
+    """Remove dispositivos desconectados do sistema"""
+    current_time = time.time()
+    devices_to_remove = []
+    
+    for device_id in list(latest_data.keys()):
+        if device_id in last_seen:
+            time_since_last_seen = current_time - last_seen[device_id]
+            if time_since_last_seen > CONNECTION_TIMEOUT:
+                devices_to_remove.append(device_id)
+    
+    # Remove os dispositivos desconectados
+    for device_id in devices_to_remove:
+        if device_id in latest_data:
+            del latest_data[device_id]
+        if device_id in last_seen:
+            del last_seen[device_id]
+        print(f"🚮 Dispositivo {device_id} removido (desconectado)")
+    
+    return devices_to_remove
 
 @app.route('/')
 def index():
@@ -143,10 +188,85 @@ def get_status():
     
     return jsonify(status_report), 200
 
+@app.route('/remove_disconnected', methods=['POST'])
+def remove_disconnected():
+    """Remove todos os dispositivos desconectados"""
+    try:
+        devices_removed = remove_disconnected_devices()
+        
+        if devices_removed:
+            return jsonify({
+                "status": "success",
+                "message": f"Removidos {len(devices_removed)} dispositivo(s) desconectado(s)",
+                "removed_devices": devices_removed
+            }), 200
+        else:
+            return jsonify({
+                "status": "info",
+                "message": "Nenhum dispositivo desconectado para remover"
+            }), 200
+    except Exception as e:
+        return jsonify({
+            "status": "error",
+            "message": f"Erro ao remover dispositivos: {str(e)}"
+        }), 500
+
+@app.route('/remove_all', methods=['POST'])
+def remove_all():
+    """Remove todos os dispositivos (conectados e desconectados)"""
+    try:
+        global latest_data, last_seen
+        
+        # Conta quantos dispositivos serão removidos
+        device_count = len(latest_data)
+        
+        # Limpa todos os dados
+        latest_data.clear()
+        last_seen.clear()
+        
+        print(f"🗑️  Todos os {device_count} dispositivos foram removidos")
+        
+        return jsonify({
+            "status": "success",
+            "message": f"Todos os {device_count} dispositivo(s) foram removidos"
+        }), 200
+    except Exception as e:
+        return jsonify({
+            "status": "error",
+            "message": f"Erro ao remover dispositivos: {str(e)}"
+        }), 500
+
 if __name__ == '__main__':
+    # Configura o handler para Ctrl+C
+    signal.signal(signal.SIGINT, signal_handler)
+    
     # Inicia a verificação periódica de status
     Timer(1.0, check_connection_status).start()
     
-    # O host '0.0.0.0' é importante para que o ESP32 possa acessar o servidor
-    print("Servidor iniciado. Monitorando conexões com timeout de 15 segundos.")
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    # Mensagem inicial
+    print("=" * 60)
+    print("🚀 Servidor iniciado!")
+    print(f"📡 Monitorando conexões com timeout de {CONNECTION_TIMEOUT} segundos")
+    print(f"🌐 Acesse: http://localhost:5000")
+    print("🛑 Pressione Ctrl+C para encerrar o servidor")
+    print("=" * 60)
+    print("🔧 Novos endpoints de limpeza:")
+    print("   - POST /remove_disconnected - Remove veículos desconectados")
+    print("   - POST /remove_all - Remove todos os veículos")
+    print("=" * 60)
+    
+    try:
+        # Inicia o servidor com configurações otimizadas para Windows
+        app.run(
+            host='0.0.0.0', 
+            port=5000, 
+            debug=True, 
+            use_reloader=False,  # IMPORTANTE: desabilita recarregamento automático
+            threaded=True
+        )
+    except KeyboardInterrupt:
+        # Captura Ctrl+C se o signal handler não funcionar
+        signal_handler(signal.SIGINT, None)
+    finally:
+        # Garante que o evento de shutdown seja setado
+        shutdown_event.set()

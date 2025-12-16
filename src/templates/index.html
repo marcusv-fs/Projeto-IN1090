@@ -12,6 +12,9 @@
             --primary-color: #007bff;
             --dark-color: #343a40;
             --light-color: #f8f9fa;
+            --danger-color: #dc3545;
+            --danger-hover: #bd2130;
+            --warning-hover: #e0a800;
         }
         
         body {
@@ -194,6 +197,7 @@
             padding: 15px;
             border-radius: 10px;
             box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            position: relative;
         }
         
         .data-label {
@@ -220,6 +224,67 @@
             font-size: 0.9rem;
             color: #6c757d;
             margin-left: 3px;
+        }
+        
+        .violation-counter {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background: #dc3545;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+            box-shadow: 0 2px 5px rgba(220, 53, 69, 0.3);
+        }
+        
+        .violation-counter.hidden {
+            display: none;
+        }
+        
+        .value-container {
+            display: flex;
+            align-items: baseline;
+        }
+        
+        .limit-settings {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #e9ecef;
+        }
+        
+        .limit-row {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 8px;
+            align-items: center;
+            font-size: 0.85rem;
+        }
+        
+        .limit-label {
+            font-weight: 600;
+            color: #6c757d;
+            min-width: 50px;
+        }
+        
+        .limit-input {
+            width: 60px;
+            padding: 4px 6px;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            font-size: 0.85rem;
+            text-align: center;
+        }
+        
+        .limit-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 3px rgba(0, 123, 255, 0.25);
         }
         
         .rpm { color: #dc3545; }
@@ -295,6 +360,156 @@
             box-shadow: 0 8px 20px rgba(0,0,0,0.15);
         }
         
+        /* Botões de limpeza */
+        .cleanup-section {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .cleanup-title {
+            font-weight: 600;
+            color: var(--dark-color);
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .cleanup-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .cleanup-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .cleanup-btn.remove-disconnected {
+            background: var(--warning-color);
+            color: #000;
+        }
+        
+        .cleanup-btn.remove-disconnected:hover {
+            background: var(--warning-hover);
+            transform: translateY(-2px);
+        }
+        
+        .cleanup-btn.remove-all {
+            background: var(--danger-color);
+            color: white;
+        }
+        
+        .cleanup-btn.remove-all:hover {
+            background: var(--danger-hover);
+            transform: translateY(-2px);
+        }
+        
+        .filter-section {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .filter-title {
+            font-weight: 600;
+            color: var(--dark-color);
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .filter-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            align-items: flex-end;
+        }
+        
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .filter-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #6c757d;
+        }
+        
+        .filter-input {
+            padding: 8px 12px;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            transition: border-color 0.3s ease;
+            background: white;
+        }
+        
+        .filter-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+        
+        .filter-btn {
+            padding: 8px 16px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+        }
+        
+        .clear-filters-btn {
+            padding: 8px 16px;
+            background: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .clear-filters-btn:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+        
+        .filter-status {
+            font-size: 0.9rem;
+            color: #28a745;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+        
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 40px;
+            background: white;
+            border-radius: 15px;
+        }
+        
         .fa-spin {
             animation: fa-spin 1s infinite linear;
         }
@@ -302,6 +517,44 @@
         @keyframes fa-spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
+        }
+        
+        /* Notificações */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            opacity: 0;
+            transform: translateX(100px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .notification.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .notification.success {
+            background-color: #28a745;
+        }
+        
+        .notification.error {
+            background-color: #dc3545;
+        }
+        
+        .notification.info {
+            background-color: #17a2b8;
+        }
+        
+        .notification.warning {
+            background-color: #ffc107;
+            color: #000;
         }
         
         @media (max-width: 768px) {
@@ -317,6 +570,16 @@
             .summary-card {
                 width: 100%;
                 max-width: 300px;
+            }
+            
+            .cleanup-controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .cleanup-btn {
+                width: 100%;
+                justify-content: center;
             }
         }
     </style>
@@ -349,13 +612,118 @@
             </div>
         </header>
         
+        <div class="cleanup-section">
+            <div class="cleanup-title">
+                <i class="fas fa-broom"></i> Limpeza de Dispositivos
+            </div>
+            <div class="cleanup-controls">
+                <button class="cleanup-btn remove-disconnected" onclick="removeDisconnectedDevices()">
+                    <i class="fas fa-trash-alt"></i> Remover Desconectados
+                </button>
+                <button class="cleanup-btn remove-all" onclick="removeAllDevices()">
+                    <i class="fas fa-bomb"></i> Remover Todos os Dispositivos
+                </button>
+            </div>
+            <div style="margin-top: 15px; font-size: 0.9rem; color: #6c757d;">
+                <i class="fas fa-info-circle"></i> Dispositivos são considerados desconectados após 15 segundos sem comunicação
+            </div>
+        </div>
+        
         <div class="auto-refresh-control">
             <button class="refresh-btn" onclick="toggleAutoRefresh()">
                 <i class="fas fa-sync-alt" id="refresh-icon"></i>
                 <span id="refresh-text">Atualização Automática: Ligado</span>
             </button>
-            <div style="margin-top: 10px; font-size: 0.9rem; color: #6c757d;">
+            <div style="margin-top: 10px; font-size: 0.9rem; color: #ffffff;">
                 Status atualizado a cada 2 segundos • Timeout: 15 segundos
+            </div>
+        </div>
+        
+        <div class="filter-section">
+            <div class="filter-title">
+                <i class="fas fa-filter"></i> Filtrar Dispositivos
+            </div>
+            <div class="filter-controls">
+                <div class="filter-group">
+                    <label class="filter-label">Combustível (%)</label>
+                    <input type="number" class="filter-input" id="fuel-filter" placeholder="Ex: 20" min="0" max="100">
+                    <small style="color: #6c757d; font-size: 0.8rem;">Abaixo de:</small>
+                </div>
+                
+                <div class="filter-group">
+                    <label class="filter-label">Temperatura (°C)</label>
+                    <input type="number" class="filter-input" id="temp-filter" placeholder="Ex: 150" min="0" max="200">
+                    <small style="color: #6c757d; font-size: 0.8rem;">Acima de:</small>
+                </div>
+                
+                <div class="filter-group">
+                    <label class="filter-label">RPM</label>
+                    <input type="number" class="filter-input" id="rpm-filter" placeholder="Ex: 3000" min="0" max="8000">
+                    <small style="color: #6c757d; font-size: 0.8rem;">Acima de:</small>
+                </div>
+                
+                <div class="filter-group">
+                    <label class="filter-label">Velocidade (km/h)</label>
+                    <input type="number" class="filter-input" id="speed-filter" placeholder="Ex: 80" min="0" max="300">
+                    <small style="color: #6c757d; font-size: 0.8rem;">Acima de:</small>
+                </div>
+                
+                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                    <button class="filter-btn" onclick="applyFilters()">
+                        <i class="fas fa-search"></i> Aplicar Filtros
+                    </button>
+                    <button class="clear-filters-btn" onclick="clearFilters()">
+                        <i class="fas fa-times"></i> Limpar
+                    </button>
+                </div>
+            </div>
+            <div class="filter-status" id="filter-status"></div>
+        </div>
+        
+        <div class="filter-section">
+            <div class="filter-title">
+                <i class="fas fa-cog"></i> Configurar Limites de Alertas
+            </div>
+            <div class="filter-controls" style="gap: 30px;">
+                <div class="filter-group">
+                    <label class="filter-label">RPM</label>
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <div>
+                            <small style="color: #6c757d; font-size: 0.8rem;">Máximo:</small>
+                            <input type="number" class="filter-input" id="rpm-max" placeholder="Ex: 6000" min="0" max="8000" value="6000">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="filter-group">
+                    <label class="filter-label">Velocidade (km/h)</label>
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <div>
+                            <small style="color: #6c757d; font-size: 0.8rem;">Máxima:</small>
+                            <input type="number" class="filter-input" id="speed-max" placeholder="Ex: 200" min="0" max="300" value="200">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="filter-group">
+                    <label class="filter-label">Temperatura (°C)</label>
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <div>
+                            <small style="color: #6c757d; font-size: 0.8rem;">Máxima:</small>
+                            <input type="number" class="filter-input" id="temp-max" placeholder="Ex: 110" min="0" max="200" value="110">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="filter-group">
+                    <label class="filter-label">Combustível (%)</label>
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <div>
+                            <small style="color: #6c757d; font-size: 0.8rem;">Mínimo:</small>
+                            <input type="number" class="filter-input" id="fuel-min" placeholder="Ex: 10" min="0" max="100" value="10">
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         
@@ -364,11 +732,160 @@
         </div>
     </div>
 
+    <!-- Notificação -->
+    <div id="notification" class="notification"></div>
+
     <script>
         let autoRefresh = true;
         let refreshInterval;
         const container = document.getElementById('dashboard-container');
         const CONNECTION_TIMEOUT = 15; // Segundos - deve corresponder ao servidor
+        let allDevicesData = {}; // Armazena todos os dados dos dispositivos
+        let activeFilters = {
+            fuelLevel: null,
+            temperature: null,
+            rpm: null,
+            speed: null
+        };
+        
+        // Armazena limites de alertas
+        let alertLimits = {
+            rpmMax: 6000,
+            speedMax: 200,
+            tempMax: 110,
+            fuelMin: 10
+        };
+        
+        // Rastreia violações e tempo fora do limite para cada dispositivo e stat
+        let violationTracking = {}; // { deviceId: { stat: { counter: 0, lastViolatedTime: 0, wasViolating: false, timeOutsideLimit: 0 } } }
+        
+        const VIOLATION_TIME_THRESHOLD = 10000; // 10 segundos em milissegundos
+        
+        // Função para mostrar notificações
+        function showNotification(message, type = 'info') {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = `notification ${type} show`;
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+        
+        // Função para remover dispositivos desconectados
+        async function removeDisconnectedDevices() {
+            if (!confirm('Tem certeza que deseja remover todos os dispositivos desconectados?')) {
+                return;
+            }
+            
+            try {
+                const response = await fetch('/remove_disconnected', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                const result = await response.json();
+                showNotification(result.message, result.status === 'success' ? 'success' : 'info');
+                
+                // Atualiza os dados após remoção
+                setTimeout(fetchData, 500);
+            } catch (error) {
+                console.error('Erro ao remover dispositivos desconectados:', error);
+                showNotification('Erro ao remover dispositivos desconectados', 'error');
+            }
+        }
+        
+        // Função para remover todos os dispositivos
+        async function removeAllDevices() {
+            if (!confirm('ATENÇÃO: Isso removerá TODOS os dispositivos, conectados e desconectados. Continuar?')) {
+                return;
+            }
+            
+            try {
+                const response = await fetch('/remove_all', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                const result = await response.json();
+                showNotification(result.message, result.status === 'success' ? 'success' : 'info');
+                
+                // Atualiza os dados após remoção
+                setTimeout(fetchData, 500);
+            } catch (error) {
+                console.error('Erro ao remover todos os dispositivos:', error);
+                showNotification('Erro ao remover todos os dispositivos', 'error');
+            }
+        }
+        
+        function loadAlertLimits() {
+            alertLimits.rpmMax = parseFloat(document.getElementById('rpm-max').value) || 6000;
+            alertLimits.speedMax = parseFloat(document.getElementById('speed-max').value) || 200;
+            alertLimits.tempMax = parseFloat(document.getElementById('temp-max').value) || 110;
+            alertLimits.fuelMin = parseFloat(document.getElementById('fuel-min').value) || 10;
+        }
+        
+        function checkStatViolation(deviceId, stat, currentValue) {
+            if (!violationTracking[deviceId]) {
+                violationTracking[deviceId] = {};
+            }
+            
+            if (!violationTracking[deviceId][stat]) {
+                violationTracking[deviceId][stat] = {
+                    counter: 0,
+                    violationStartTime: null,
+                    wasViolating: false,
+                    lastIncrementTime: 0
+                };
+            }
+            
+            const tracking = violationTracking[deviceId][stat];
+            const now = Date.now();
+            let isViolating = false;
+            
+            // Verifica se o stat está violando o limite
+            switch(stat) {
+                case 'rpm':
+                    isViolating = parseFloat(currentValue) > alertLimits.rpmMax;
+                    break;
+                case 'speed':
+                    isViolating = parseFloat(currentValue) > alertLimits.speedMax;
+                    break;
+                case 'temp':
+                    isViolating = parseFloat(currentValue) > alertLimits.tempMax;
+                    break;
+                case 'fuel':
+                    isViolating = parseFloat(currentValue) < alertLimits.fuelMin;
+                    break;
+            }
+            
+            // Transição: de não violando para violando
+            if (!tracking.wasViolating && isViolating) {
+                tracking.counter++;
+                tracking.violationStartTime = now;
+                tracking.lastIncrementTime = now;
+                tracking.wasViolating = true;
+            }
+            // Enquanto está violando
+            else if (tracking.wasViolating && isViolating) {
+                // Verifica se 10 segundos passaram desde o último incremento
+                if (now - tracking.lastIncrementTime >= VIOLATION_TIME_THRESHOLD) {
+                    tracking.counter++;
+                    tracking.lastIncrementTime = now;
+                }
+            }
+            // Transição: de violando para não violando
+            else if (tracking.wasViolating && !isViolating) {
+                tracking.wasViolating = false;
+                tracking.violationStartTime = null;
+            }
+            
+            return tracking.counter;
+        }
         
         function updateSummaryCounts(devices) {
             let connected = 0;
@@ -387,10 +904,127 @@
             document.getElementById('total-count').querySelector('.summary-value').textContent = connected + disconnected;
         }
         
+        function matchesFilters(data) {
+            // Se nenhum filtro está ativo, mostra todos os dispositivos
+            if (!activeFilters.fuelLevel && !activeFilters.temperature && !activeFilters.rpm && !activeFilters.speed) {
+                return true;
+            }
+            
+            // Filtro de combustível (abaixo de)
+            if (activeFilters.fuelLevel !== null) {
+                const fuelLevel = parseFloat(data.fuel_level) || 0;
+                if (fuelLevel >= activeFilters.fuelLevel) {
+                    return false;
+                }
+            }
+            
+            // Filtro de temperatura (acima de)
+            if (activeFilters.temperature !== null) {
+                const temp = parseFloat(data.temp_motor) || 0;
+                if (temp <= activeFilters.temperature) {
+                    return false;
+                }
+            }
+            
+            // Filtro de RPM (acima de)
+            if (activeFilters.rpm !== null) {
+                const rpm = parseFloat(data.rpm) || 0;
+                if (rpm <= activeFilters.rpm) {
+                    return false;
+                }
+            }
+            
+            // Filtro de velocidade (acima de)
+            if (activeFilters.speed !== null) {
+                const speed = parseFloat(data.speed) || 0;
+                if (speed <= activeFilters.speed) {
+                    return false;
+                }
+            }
+            
+            return true;
+        }
+        
+        function applyFilters() {
+            const fuelInput = document.getElementById('fuel-filter').value;
+            const tempInput = document.getElementById('temp-filter').value;
+            const rpmInput = document.getElementById('rpm-filter').value;
+            const speedInput = document.getElementById('speed-filter').value;
+            
+            activeFilters.fuelLevel = fuelInput ? parseFloat(fuelInput) : null;
+            activeFilters.temperature = tempInput ? parseFloat(tempInput) : null;
+            activeFilters.rpm = rpmInput ? parseFloat(rpmInput) : null;
+            activeFilters.speed = speedInput ? parseFloat(speedInput) : null;
+            
+            renderFilteredCards();
+            updateFilterStatus();
+        }
+        
+        function clearFilters() {
+            document.getElementById('fuel-filter').value = '';
+            document.getElementById('temp-filter').value = '';
+            document.getElementById('rpm-filter').value = '';
+            document.getElementById('speed-filter').value = '';
+            
+            activeFilters.fuelLevel = null;
+            activeFilters.temperature = null;
+            activeFilters.rpm = null;
+            activeFilters.speed = null;
+            
+            renderFilteredCards();
+            updateFilterStatus();
+        }
+        
+        function renderFilteredCards() {
+            container.innerHTML = '';
+            
+            let visibleCount = 0;
+            Object.keys(allDevicesData).forEach(deviceId => {
+                const data = allDevicesData[deviceId];
+                if (matchesFilters(data)) {
+                    container.insertAdjacentHTML('beforeend', createDeviceCard(deviceId, data));
+                    visibleCount++;
+                }
+            });
+            
+            if (visibleCount === 0) {
+                container.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-search" style="font-size: 3rem; color: #6c757d; margin-bottom: 20px;"></i>
+                        <h3>Nenhum dispositivo encontrado</h3>
+                        <p>Tente ajustar os filtros e tentar novamente</p>
+                    </div>
+                `;
+            }
+        }
+        
+        function updateFilterStatus() {
+            const statusDiv = document.getElementById('filter-status');
+            const activeFiltersCount = Object.values(activeFilters).filter(v => v !== null).length;
+            
+            if (activeFiltersCount === 0) {
+                statusDiv.textContent = '';
+            } else {
+                const filters = [];
+                if (activeFilters.fuelLevel !== null) filters.push(`Combustível < ${activeFilters.fuelLevel}%`);
+                if (activeFilters.temperature !== null) filters.push(`Temperatura > ${activeFilters.temperature}°C`);
+                if (activeFilters.rpm !== null) filters.push(`RPM > ${activeFilters.rpm}`);
+                if (activeFilters.speed !== null) filters.push(`Velocidade > ${activeFilters.speed} km/h`);
+                
+                statusDiv.textContent = `🔍 Filtros ativos: ${filters.join(' • ')}`;
+            }
+        }
+        
         function createDeviceCard(deviceId, data) {
             const isConnected = data.connection_status === 'connected';
             const connectionClass = isConnected ? 'connected' : 'disconnected';
             const lastSeenText = data.last_seen_seconds ? `Visto há ${data.last_seen_seconds}s` : 'Nunca visto';
+            
+            // Calcula violações para cada stat
+            const rpmCount = checkStatViolation(deviceId, 'rpm', data.rpm);
+            const speedCount = checkStatViolation(deviceId, 'speed', data.speed);
+            const tempCount = checkStatViolation(deviceId, 'temp', data.temp_motor);
+            const fuelCount = checkStatViolation(deviceId, 'fuel', data.fuel_level);
             
             return `
                 <div class="device-card ${connectionClass}" id="card-${deviceId}">
@@ -433,6 +1067,7 @@
                                 <span class="data-value rpm">${data.rpm}</span>
                                 <span class="unit">RPM</span>
                             </div>
+                            ${rpmCount > 0 ? `<div class="violation-counter">${rpmCount}</div>` : '<div class="violation-counter hidden">0</div>'}
                         </div>
                         
                         <div class="data-item">
@@ -443,6 +1078,7 @@
                                 <span class="data-value speed">${data.speed}</span>
                                 <span class="unit">km/h</span>
                             </div>
+                            ${speedCount > 0 ? `<div class="violation-counter">${speedCount}</div>` : '<div class="violation-counter hidden">0</div>'}
                         </div>
                         
                         <div class="data-item">
@@ -453,6 +1089,7 @@
                                 <span class="data-value temp">${data.temp_motor}</span>
                                 <span class="unit">°C</span>
                             </div>
+                            ${tempCount > 0 ? `<div class="violation-counter">${tempCount}</div>` : '<div class="violation-counter hidden">0</div>'}
                         </div>
                         
                         <div class="data-item">
@@ -463,6 +1100,7 @@
                                 <span class="data-value fuel">${data.fuel_level}</span>
                                 <span class="unit">%</span>
                             </div>
+                            ${fuelCount > 0 ? `<div class="violation-counter">${fuelCount}</div>` : '<div class="violation-counter hidden">0</div>'}
                         </div>
                         
                         <div class="data-item">
@@ -517,6 +1155,9 @@
         function fetchData() {
             if (!autoRefresh) return;
             
+            // Carrega limites de alerta atualizados
+            loadAlertLimits();
+            
             fetch('/latest')
                 .then(response => {
                     if (!response.ok) {
@@ -527,7 +1168,7 @@
                 .then(allData => {
                     if (Object.keys(allData).length === 0) {
                         container.innerHTML = `
-                            <div style="grid-column: 1 / -1; text-align: center; padding: 40px; background: white; border-radius: 15px;">
+                            <div class="no-results">
                                 <i class="fas fa-car" style="font-size: 3rem; color: #6c757d; margin-bottom: 20px;"></i>
                                 <h3>Nenhum dispositivo conectado</h3>
                                 <p>Aguardando dados dos veículos...</p>
@@ -538,123 +1179,22 @@
                         return;
                     }
                     
+                    // Armazena todos os dados
+                    allDevicesData = allData;
+                    
                     // Atualiza contadores
                     updateSummaryCounts(allData);
                     
-                    // Atualiza ou cria cards
-                    Object.keys(allData).forEach(deviceId => {
-                        const data = allData[deviceId];
-                        const cardId = `card-${deviceId}`;
-                        let card = document.getElementById(cardId);
-                        
-                        if (!card) {
-                            container.insertAdjacentHTML('beforeend', createDeviceCard(deviceId, data));
-                        } else {
-                            // Atualiza o card existente
-                            updateDeviceCard(cardId, deviceId, data);
-                        }
-                    });
-                    
-                    // Remove dispositivos que não existem mais (se necessário)
-                    // Esta parte pode ser implementada se você quiser remover dispositivos antigos
+                    // Renderiza cards filtrados
+                    renderFilteredCards();
                 })
                 .catch(error => {
                     console.error('Erro ao buscar dados:', error);
+                    showNotification('Erro ao conectar com o servidor', 'error');
                 });
         }
         
-        function updateDeviceCard(cardId, deviceId, data) {
-            const card = document.getElementById(cardId);
-            if (!card) return;
-            
-            const isConnected = data.connection_status === 'connected';
-            const connectionClass = isConnected ? 'connected' : 'disconnected';
-            
-            // Atualiza classes de conexão
-            card.className = `device-card ${connectionClass}`;
-            
-            // Atualiza indicador de conexão
-            const indicator = card.querySelector('.connection-indicator');
-            indicator.className = `connection-indicator ${connectionClass}`;
-            indicator.innerHTML = `
-                <span class="status-dot ${connectionClass}"></span>
-                ${isConnected ? 'CONECTADO' : 'DESCONECTADO'}
-            `;
-            
-            // Atualiza último visto
-            const lastSeen = card.querySelector('.last-seen');
-            if (lastSeen) {
-                lastSeen.textContent = data.last_seen_seconds ? 
-                    `Visto há ${data.last_seen_seconds}s` : 'Nunca visto';
-            }
-            
-            // Atualiza valores dos dados
-            updateIfChanged(card, '.data-value.rpm', data.rpm);
-            updateIfChanged(card, '.data-value.speed', data.speed);
-            updateIfChanged(card, '.data-value.temp', data.temp_motor);
-            updateIfChanged(card, '.data-value.throttle', data.throttle_pos);
-            updateIfChanged(card, '.data-value.voltage', data.voltage);
-            updateIfChanged(card, '.data-value.gear', data.gear === 0 ? 'N' : data.gear);
-            updateIfChanged(card, '.data-value.fuel', data.fuel_level);
-            
-            // Atualiza status
-            const statusElement = card.querySelector('.data-value[style*="color:"]');
-            if (statusElement) {
-                statusElement.style.color = isConnected ? '#28a745' : '#dc3545';
-                statusElement.textContent = isConnected ? 'Ativo' : 'Inativo';
-            }
-            
-            // Atualiza timestamp
-            const timestampElement = card.querySelector('.timestamp');
-            if (timestampElement) {
-                timestampElement.innerHTML = `<i class="far fa-clock"></i> Última atualização: ${data.timestamp}`;
-            }
-            
-            // Atualiza ou cria overlay de desconexão
-            let overlay = card.querySelector('.disconnected-overlay');
-            
-            if (!isConnected) {
-                if (!overlay) {
-                    card.insertAdjacentHTML('beforeend', `
-                        <div class="disconnected-overlay">
-                            <div class="disconnected-message">
-                                <div class="disconnected-icon">
-                                    <i class="fas fa-exclamation-triangle"></i>
-                                </div>
-                                <div class="disconnected-title">VEÍCULO DESCONECTADO</div>
-                                <p>Sem comunicação há ${data.last_seen_seconds || '?'} segundos</p>
-                                <p style="font-size: 0.9rem; margin-top: 10px;">
-                                    Última atualização:<br>
-                                    ${data.timestamp || 'N/A'}
-                                </p>
-                            </div>
-                        </div>
-                    `);
-                } else {
-                    // Atualiza mensagem no overlay existente
-                    const message = overlay.querySelector('p');
-                    if (message) {
-                        message.textContent = `Sem comunicação há ${data.last_seen_seconds || '?'} segundos`;
-                    }
-                }
-            } else if (overlay) {
-                // Remove overlay se agora está conectado
-                overlay.remove();
-            }
-        }
-        
-        function updateIfChanged(card, selector, newValue) {
-            const element = card.querySelector(selector);
-            if (element && element.textContent !== String(newValue)) {
-                element.textContent = newValue;
-                
-                // Efeito visual de atualização
-                element.style.transform = 'scale(1.1)';
-                setTimeout(() => {
-                    element.style.transform = 'scale(1)';
-                }, 300);
-            }
-        }
+
         
         function toggleAutoRefresh() {
             autoRefresh = !autoRefresh;

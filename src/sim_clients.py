@@ -5,10 +5,10 @@ Este script simula N dispositivos ESP32 enviando dados OBD-II para o servidor Fl
 Cada dispositivo é executado em uma thread separada e envia dados em intervalos regulares.
 
 Uso:
-    python esp32_simulator.py --devices 3 --interval 2 --server http://localhost:5000/data
+    python sim_clients.py --devices 3 --interval 2 --server http://localhost:5000/data --types sedan,suv
 
 Autor: Assistente ESP32
-Versão: 1.0
+Versão: 1.1 (Atualizado para enviar vehicle_type)
 """
 
 import requests
@@ -36,16 +36,20 @@ logger = logging.getLogger(__name__)
 
 class VehicleType(Enum):
     """Tipos de veículos simulados"""
-    SEDAN = "Sedan"
-    SUV = "SUV"
-    PICKUP = "Pickup"
-    HATCH = "Hatch"
-    SPORT = "Esportivo"
+    SEDAN = "sedan"
+    SUV = "suv"
+    PICKUP = "pickup"
+    HATCH = "hatch"
+    SPORT = "sport"
+    CAR = "car"  # Adicionado para compatibilidade
+    MOTORCYCLE = "motorcycle"  # Adicionado para compatibilidade
+    TRUCK = "truck"  # Adicionado para compatibilidade
 
 @dataclass
 class ECUData:
     """Estrutura de dados da ECU"""
     device_id: str
+    vehicle_type: str  # Novo campo obrigatório
     rpm: int
     speed: float
     temp_motor: float
@@ -126,6 +130,24 @@ class ESP32Simulator:
                 'speed_range': (40, 180),
                 'temp_range': (90, 110),
                 'max_gear': 7
+            },
+            VehicleType.CAR: {  # Configuração genérica para 'car'
+                'rpm_range': (800, 4000),
+                'speed_range': (30, 130),
+                'temp_range': (85, 100),
+                'max_gear': 6
+            },
+            VehicleType.MOTORCYCLE: {  # Configuração para 'motorcycle'
+                'rpm_range': (1500, 8000),
+                'speed_range': (40, 160),
+                'temp_range': (85, 105),
+                'max_gear': 6
+            },
+            VehicleType.TRUCK: {  # Configuração para 'truck'
+                'rpm_range': (700, 3000),
+                'speed_range': (20, 90),
+                'temp_range': (90, 110),
+                'max_gear': 10
             }
         }
         return configs.get(vehicle_type, configs[VehicleType.SEDAN])
@@ -150,9 +172,9 @@ class ESP32Simulator:
         
         # RPM baseado no throttle e tipo de veículo
         rpm_multiplier = 1.0
-        if self.vehicle_type == VehicleType.SPORT:
+        if self.vehicle_type in [VehicleType.SPORT, VehicleType.MOTORCYCLE]:
             rpm_multiplier = 1.5
-        elif self.vehicle_type == VehicleType.PICKUP:
+        elif self.vehicle_type in [VehicleType.PICKUP, VehicleType.TRUCK]:
             rpm_multiplier = 1.2
             
         target_rpm = (self.state['throttle_base'] / 100) * self.config['rpm_range'][1] * rpm_multiplier
@@ -166,6 +188,8 @@ class ESP32Simulator:
         
         # 3. Marcha baseada na velocidade
         speed = self.state['speed_base']
+        max_gear = self.config['max_gear']
+        
         if speed < 20:
             self.state['gear'] = 1
         elif speed < 40:
@@ -176,10 +200,18 @@ class ESP32Simulator:
             self.state['gear'] = 4
         elif speed < 100:
             self.state['gear'] = 5
-        elif speed < 120:
+        elif speed < 120 and max_gear >= 6:
             self.state['gear'] = 6
+        elif speed < 140 and max_gear >= 7:
+            self.state['gear'] = 7
+        elif speed < 160 and max_gear >= 8:
+            self.state['gear'] = 8
+        elif speed < 180 and max_gear >= 9:
+            self.state['gear'] = 9
+        elif max_gear >= 10:
+            self.state['gear'] = 10
         else:
-            self.state['gear'] = 7 if self.vehicle_type == VehicleType.SPORT else 6
+            self.state['gear'] = max_gear
         
         # 4. Temperatura correlacionada com RPM e velocidade
         temp_increase = (self.state['rpm_base'] / 3000) * 10
@@ -206,6 +238,7 @@ class ESP32Simulator:
         
         return ECUData(
             device_id=self.device_id,
+            vehicle_type=self.vehicle_type.value,  # Envia o valor do enum (string)
             rpm=int(self.state['rpm_base']),
             speed=round(self.state['speed_base'], 1),
             temp_motor=round(self.state['temp_base'], 1),
@@ -227,12 +260,16 @@ class ESP32Simulator:
             True se o envio foi bem-sucedido, False caso contrário
         """
         try:
-            # Adiciona campos obrigatórios para o servidor Flask
+            # Converte para dicionário
             payload = data.to_dict()
             
-            # Renomeia campos para corresponder ao esperado pelo servidor
+            # O servidor agora espera vehicle_type, não device_id como identificador principal
+            # Mas mantemos o device_id como um campo adicional
             payload['temp_motor'] = payload.pop('temp_motor')
             payload['throttle_pos'] = payload.pop('throttle_pos')
+            
+            # NOTA: O campo 'vehicle_type' já está no payload (adicionado no ECUData)
+            # O servidor usará vehicle_type como identificador principal
             
             headers = {'Content-Type': 'application/json'}
             
@@ -252,10 +289,10 @@ class ESP32Simulator:
             )
             
             if response.status_code == 200:
-                logger.debug(f"Dispositivo {self.device_id}: Dados enviados com sucesso")
+                logger.debug(f"Dispositivo {self.device_id} ({data.vehicle_type}): Dados enviados com sucesso")
                 return True
             else:
-                logger.warning(f"Dispositivo {self.device_id}: Erro HTTP {response.status_code}")
+                logger.warning(f"Dispositivo {self.device_id}: Erro HTTP {response.status_code} - {response.text}")
                 return False
                 
         except requests.exceptions.ConnectionError:
@@ -276,7 +313,7 @@ class ESP32Simulator:
             interval: Intervalo entre envios (em segundos)
         """
         self.running = True
-        logger.info(f"Dispositivo {self.device_id} iniciado. Intervalo: {interval}s")
+        logger.info(f"Dispositivo {self.device_id} ({self.vehicle_type.value}) iniciado. Intervalo: {interval}s")
         
         consecutive_failures = 0
         max_consecutive_failures = 5
@@ -288,7 +325,8 @@ class ESP32Simulator:
                 
                 # Exibe dados no console (opcional)
                 if random.random() < 0.1:  # Apenas 10% das vezes para não poluir
-                    logger.info(f"{self.device_id}: RPM={ecu_data.rpm}, Vel={ecu_data.speed}km/h, "
+                    logger.info(f"{self.device_id} ({ecu_data.vehicle_type}): "
+                               f"RPM={ecu_data.rpm}, Vel={ecu_data.speed}km/h, "
                                f"Temp={ecu_data.temp_motor}°C, Comb={ecu_data.fuel_level}%")
                 
                 # Envia dados para o servidor
@@ -323,7 +361,7 @@ class ESP32Simulator:
             daemon=True
         )
         self.thread.start()
-        logger.info(f"Dispositivo {self.device_id} iniciado na thread {self.thread.name}")
+        logger.info(f"Dispositivo {self.device_id} ({self.vehicle_type.value}) iniciado na thread {self.thread.name}")
     
     def stop(self):
         """Para a execução do dispositivo"""
@@ -353,7 +391,9 @@ class SimulatorManager:
             Lista de IDs dos dispositivos criados
         """
         if vehicle_types is None:
-            vehicle_types = random.choices(list(VehicleType), k=num_devices)
+            # Distribui tipos de veículos de forma balanceada
+            all_types = list(VehicleType)
+            vehicle_types = [random.choice(all_types) for _ in range(num_devices)]
         elif len(vehicle_types) < num_devices:
             # Repete tipos se necessário
             vehicle_types = vehicle_types * (num_devices // len(vehicle_types) + 1)
@@ -361,7 +401,7 @@ class SimulatorManager:
         
         device_ids = []
         for i in range(num_devices):
-            device_id = f"Truck_{i+1:03d}"
+            device_id = f"{vehicle_types[i].value}_{i+1:03d}"
             vehicle_type = vehicle_types[i]
             
             device = ESP32Simulator(
@@ -374,6 +414,16 @@ class SimulatorManager:
             device_ids.append(device_id)
         
         logger.info(f"Criados {num_devices} dispositivos simulados")
+        
+        # Log dos tipos de veículos criados
+        type_counts = {}
+        for device in self.devices.values():
+            v_type = device.vehicle_type.value
+            type_counts[v_type] = type_counts.get(v_type, 0) + 1
+        
+        for v_type, count in type_counts.items():
+            logger.info(f"  - {v_type}: {count} dispositivo(s)")
+        
         return device_ids
     
     def start_all(self, interval: float = 2.0):
@@ -434,15 +484,15 @@ Exemplos:
   %(prog)s --devices 2 --server http://192.168.1.100:5000/data
   %(prog)s --devices 4 --types sedan,suv     # Tipos específicos de veículos
   
-Tipos de veículos disponíveis: sedan, suv, pickup, hatch, sport
+Tipos de veículos disponíveis: sedan, suv, pickup, hatch, sport, car, motorcycle, truck
         """
     )
     
     parser.add_argument(
         '--devices', '-d',
         type=int,
-        default=3,
-        help='Número de dispositivos a simular (padrão: 3)'
+        default=15,
+        help='Número de dispositivos a simular (padrão: 15)'
     )
     
     parser.add_argument(
@@ -463,7 +513,7 @@ Tipos de veículos disponíveis: sedan, suv, pickup, hatch, sport
         '--types', '-t',
         type=str,
         default='',
-        help='Tipos de veículos (separados por vírgula): sedan,suv,pickup,hatch,sport'
+        help='Tipos de veículos (separados por vírgula): sedan,suv,pickup,hatch,sport,car,motorcycle,truck'
     )
     
     parser.add_argument(
@@ -496,7 +546,10 @@ def main():
             'suv': VehicleType.SUV,
             'pickup': VehicleType.PICKUP,
             'hatch': VehicleType.HATCH,
-            'sport': VehicleType.SPORT
+            'sport': VehicleType.SPORT,
+            'car': VehicleType.CAR,
+            'motorcycle': VehicleType.MOTORCYCLE,
+            'truck': VehicleType.TRUCK
         }
         
         for type_str in args.types.split(','):
@@ -530,11 +583,13 @@ def main():
         )
         
         logger.info("=" * 60)
-        logger.info(f"SIMULADOR ESP32 - INICIANDO")
+        logger.info(f"SIMULADOR ESP32 - INICIANDO (v1.1)")
         logger.info(f"Dispositivos: {args.devices}")
         logger.info(f"Intervalo: {args.interval}s")
         logger.info(f"Servidor: {args.server}")
         logger.info(f"Duração: {args.duration or 'Indefinida'}s")
+        logger.info("=" * 60)
+        logger.info("IMPORTANTE: Agora enviando 'vehicle_type' no lugar de 'device_id' como identificador principal")
         logger.info("=" * 60)
         
         # Inicia todos os dispositivos
@@ -545,6 +600,7 @@ def main():
         
     except KeyboardInterrupt:
         logger.info("\nSimulação interrompida pelo usuário")
+        exit(1)
     except Exception as e:
         logger.error(f"Erro na simulação: {str(e)}")
     finally:
