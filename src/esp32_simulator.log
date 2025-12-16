@@ -3726,3 +3726,134 @@ Simulação interrompida pelo usuário
 2025-12-16 09:37:13,879 - INFO - Todos os dispositivos parados
 2025-12-16 09:37:13,880 - INFO - Simulação finalizada
 2025-12-16 09:44:39,250 - INFO - Dispositivo sport_001 inicializado (sport)
+2025-12-16 09:44:39,250 - INFO - Dispositivo motorcycle_002 inicializado (motorcycle)
+2025-12-16 09:44:39,250 - INFO - Dispositivo car_003 inicializado (car)
+2025-12-16 09:44:39,251 - INFO - Dispositivo sport_004 inicializado (sport)
+2025-12-16 09:44:39,251 - INFO - Dispositivo sport_005 inicializado (sport)
+2025-12-16 09:44:39,251 - INFO - Dispositivo pickup_006 inicializado (pickup)
+2025-12-16 09:44:39,251 - INFO - Dispositivo hatch_007 inicializado (hatch)
+2025-12-16 09:44:39,251 - INFO - Dispositivo motorcycle_008 inicializado (motorcycle)
+2025-12-16 09:44:39,251 - INFO - Dispositivo car_009 inicializado (car)
+2025-12-16 09:44:39,251 - INFO - Dispositivo motorcycle_010 inicializado (motorcycle)
+2025-12-16 09:44:39,251 - INFO - Dispositivo suv_011 inicializado (suv)
+2025-12-16 09:44:39,251 - INFO - Dispositivo motorcycle_012 inicializado (motorcycle)
+2025-12-16 09:44:39,251 - INFO - Dispositivo pickup_013 inicializado (pickup)
+2025-12-16 09:44:39,251 - INFO - Dispositivo car_014 inicializado (car)
+2025-12-16 09:44:39,251 - INFO - Dispositivo pickup_015 inicializado (pickup)
+2025-12-16 09:44:39,251 - INFO - Criados 15 dispositivos simulados
+2025-12-16 09:44:39,252 - INFO -   - sport: 3 dispositivo(s)
+2025-12-16 09:44:39,252 - INFO -   - motorcycle: 4 dispositivo(s)
+2025-12-16 09:44:39,252 - INFO -   - car: 3 dispositivo(s)
+2025-12-16 09:44:39,252 - INFO -   - pickup: 3 dispositivo(s)
+2025-12-16 09:44:39,252 - INFO -   - hatch: 1 dispositivo(s)
+2025-12-16 09:44:39,252 - INFO -   - suv: 1 dispositivo(s)
+2025-12-16 09:44:39,252 - INFO - ============================================================
+2025-12-16 09:44:39,252 - INFO - SIMULADOR ESP32 - INICIANDO (v1.1)
+2025-12-16 09:44:39,252 - INFO - Dispositivos: 15
+2025-12-16 09:44:39,252 - INFO - Intervalo: 2.0s
+2025-12-16 09:44:39,252 - INFO - Servidor: http://localhost:5000/data
+2025-12-16 09:44:39,252 - INFO - Duração: Indefinidas
+2025-12-16 09:44:39,252 - INFO - ============================================================
+2025-12-16 09:44:39,252 - INFO - IMPORTANTE: Agora enviando 'vehicle_type' no lugar de 'device_id' como identificador principal
+2025-12-16 09:44:39,252 - INFO - ============================================================
+2025-12-16 09:44:39,253 - INFO - Dispositivo sport_001 (sport) iniciado. Intervalo: 2.0s
+2025-12-16 09:44:39,253 - INFO - Dispositivo sport_001 (sport) iniciado na thread ESP32-sport_001
+2025-12-16 09:44:39,253 - INFO - sport_001 (sport): RPM=2134, Vel=104.6km/h, Temp=90°C, Comb=52.9%
+2025-12-16 09:44:39,253 - INFO - Dispositivo motorcycle_002 (motorcycle) iniciado. Intervalo: 2.0s
+2025-12-16 09:44:39,253 - INFO - Dispositivo motorcycle_002 (motorcycle) iniciado na thread ESP32-motorcycle_002
+2025-12-16 09:44:39,254 - INFO - Dispositivo car_003 (car) iniciado. Intervalo: 2.0s
+2025-12-16 09:44:39,254 - INFO - Dispositivo car_003 (car) iniciado na thread ESP32-car_003
+2025-12-16 09:44:39,254 - INFO - Dispositivo sport_004 (sport) iniciado. Intervalo: 2.0s
+2025-12-16 09:44:39,254 - INFO - Dispositivo sport_004 (sport) iniciado na thread ESP32-sport_004
+2025-12-16 09:44:39,254 - INFO - Dispositivo sport_005 (sport) iniciado. Intervalo: 2.0s
+2025-12-16 09:44:39,254 - INFO - Dispositivo sport_005 (sport) iniciado na thread ESP32-sport_005
+2025-12-16 09:44:39,255 - INFO - Dispositivo pickup_006 (pickup) iniciado. Intervalo: 2.0s
+2025-12-16 09:44:39,255 - INFO - Dispositivo pickup_006 (pickup) iniciado na thread ESP32-pickup_006
+2025-12-16 09:44:39,255 - INFO - Dispositivo hatch_007 (hatch) iniciado. Intervalo: 2.0s
+2025-12-16 09:44:39,255 - INFO - Dispositivo hatch_007 (hatch) iniciado na thread ESP32-hatch_007
+2025-12-16 09:44:39,255 - INFO - Dispositivo motorcycle_008 (motorcycle) iniciado. Intervalo: 2.0s
+2025-12-16 09:44:39,255 - INFO - Dispositivo motorcycle_008 (motorcycle) iniciado na thread ESP32-motorcycle_008
+2025-12-16 09:44:39,256 - INFO - motorcycle_008 (motorcycle): RPM=3459, Vel=118.4km/h, Temp=87.9°C, Comb=89.2%
+2025-12-16 09:44:39,256 - INFO - Dispositivo car_009 (car) iniciado. Intervalo: 2.0s
+2025-12-16 09:44:39,256 - INFO - Dispositivo car_009 (car) iniciado na thread ESP32-car_009
+2025-12-16 09:44:39,256 - INFO - Dispositivo motorcycle_010 (motorcycle) iniciado. Intervalo: 2.0s
+2025-12-16 09:44:39,256 - INFO - Dispositivo motorcycle_010 (motorcycle) iniciado na thread ESP32-motorcycle_010
+2025-12-16 09:44:39,256 - INFO - Dispositivo suv_011 (suv) iniciado. Intervalo: 2.0s
+2025-12-16 09:44:39,256 - INFO - Dispositivo suv_011 (suv) iniciado na thread ESP32-suv_011
+2025-12-16 09:44:39,257 - INFO - Dispositivo motorcycle_012 (motorcycle) iniciado. Intervalo: 2.0s
+2025-12-16 09:44:39,257 - INFO - Dispositivo motorcycle_012 (motorcycle) iniciado na thread ESP32-motorcycle_012
+2025-12-16 09:44:39,257 - INFO - Dispositivo pickup_013 (pickup) iniciado. Intervalo: 2.0s
+2025-12-16 09:44:39,257 - INFO - Dispositivo pickup_013 (pickup) iniciado na thread ESP32-pickup_013
+2025-12-16 09:44:39,257 - INFO - Dispositivo car_014 (car) iniciado. Intervalo: 2.0s
+2025-12-16 09:44:39,257 - INFO - Dispositivo car_014 (car) iniciado na thread ESP32-car_014
+2025-12-16 09:44:39,258 - INFO - Dispositivo pickup_015 (pickup) iniciado. Intervalo: 2.0s
+2025-12-16 09:44:39,258 - INFO - Dispositivo pickup_015 (pickup) iniciado na thread ESP32-pickup_015
+2025-12-16 09:44:39,258 - INFO - Todos os 15 dispositivos iniciados
+2025-12-16 09:44:43,304 - INFO - pickup_013 (pickup): RPM=1732, Vel=37.4km/h, Temp=92.7°C, Comb=61.5%
+2025-12-16 09:44:47,369 - INFO - sport_004 (sport): RPM=2881, Vel=94.6km/h, Temp=92.1°C, Comb=76.2%
+2025-12-16 09:44:49,259 - INFO - Monitor: 15/15 dispositivos ativos
+2025-12-16 09:44:51,520 - INFO - sport_001 (sport): RPM=1660, Vel=104.6km/h, Temp=90°C, Comb=52.9%
+2025-12-16 09:44:55,612 - INFO - pickup_015 (pickup): RPM=1318, Vel=41.8km/h, Temp=91.6°C, Comb=55.4%
+2025-12-16 09:44:59,260 - INFO - Monitor: 15/15 dispositivos ativos
+2025-12-16 09:44:59,522 - INFO - motorcycle_010 (motorcycle): RPM=3782, Vel=95.3km/h, Temp=89.2°C, Comb=79.5%
+2025-12-16 09:44:59,645 - INFO - car_009 (car): RPM=1248, Vel=51.7km/h, Temp=85.5°C, Comb=39.9%
+2025-12-16 09:45:03,673 - INFO - car_014 (car): RPM=1067, Vel=66.7km/h, Temp=85°C, Comb=50.5%
+2025-12-16 09:45:03,816 - INFO - motorcycle_008 (motorcycle): RPM=2965, Vel=129.5km/h, Temp=85°C, Comb=89.2%
+2025-12-16 09:45:07,732 - INFO - sport_004 (sport): RPM=3210, Vel=112.6km/h, Temp=90.9°C, Comb=76.2%
+2025-12-16 09:45:07,765 - INFO - car_014 (car): RPM=1022, Vel=66.4km/h, Temp=85°C, Comb=50.5%
+2025-12-16 09:45:09,260 - INFO - Monitor: 15/15 dispositivos ativos
+2025-12-16 09:45:11,783 - INFO - pickup_015 (pickup): RPM=1310, Vel=43.1km/h, Temp=91.2°C, Comb=55.4%
+2025-12-16 09:45:11,876 - INFO - motorcycle_002 (motorcycle): RPM=3128, Vel=107.5km/h, Temp=85.9°C, Comb=45.7%
+2025-12-16 09:45:16,026 - INFO - sport_005 (sport): RPM=2829, Vel=143.2km/h, Temp=90°C, Comb=96.0%
+2025-12-16 09:45:19,261 - INFO - Monitor: 15/15 dispositivos ativos
+2025-12-16 09:45:19,958 - INFO - pickup_015 (pickup): RPM=1231, Vel=44.9km/h, Temp=91.0°C, Comb=55.4%
+2025-12-16 09:45:23,954 - INFO - pickup_006 (pickup): RPM=2146, Vel=89.3km/h, Temp=90°C, Comb=51.4%
+2025-12-16 09:45:24,065 - INFO - car_014 (car): RPM=992, Vel=63.8km/h, Temp=85°C, Comb=50.4%
+2025-12-16 09:45:28,159 - INFO - car_014 (car): RPM=997, Vel=63.9km/h, Temp=85°C, Comb=50.4%
+2025-12-16 09:45:28,252 - INFO - motorcycle_012 (motorcycle): RPM=2938, Vel=135.3km/h, Temp=85°C, Comb=75.6%
+2025-12-16 09:45:29,261 - INFO - Monitor: 15/15 dispositivos ativos
+2025-12-16 09:45:32,162 - INFO - car_009 (car): RPM=1105, Vel=52.0km/h, Temp=85.2°C, Comb=39.9%
+2025-12-16 09:45:36,293 - INFO - sport_005 (sport): RPM=2797, Vel=151.0km/h, Temp=90°C, Comb=96.0%
+2025-12-16 09:45:36,321 - INFO - motorcycle_010 (motorcycle): RPM=4676, Vel=144.4km/h, Temp=89.2°C, Comb=79.4%
+2025-12-16 09:45:36,358 - INFO - car_003 (car): RPM=1354, Vel=65.1km/h, Temp=85°C, Comb=67.9%
+2025-12-16 09:45:36,399 - INFO - pickup_013 (pickup): RPM=1163, Vel=43.9km/h, Temp=90°C, Comb=61.4%
+2025-12-16 09:45:39,262 - INFO - Monitor: 15/15 dispositivos ativos
+2025-12-16 09:45:40,242 - INFO - pickup_006 (pickup): RPM=1933, Vel=88.2km/h, Temp=90°C, Comb=51.4%
+2025-12-16 09:45:40,308 - ERROR - Dispositivo pickup_006: Erro inesperado: Simulação de falha de conexão
+2025-12-16 09:45:40,443 - INFO - sport_001 (sport): RPM=1200, Vel=93.0km/h, Temp=90°C, Comb=52.9%
+2025-12-16 09:45:40,460 - INFO - pickup_013 (pickup): RPM=1179, Vel=43.4km/h, Temp=91.2°C, Comb=61.4%
+2025-12-16 09:45:44,359 - INFO - car_009 (car): RPM=1111, Vel=50.4km/h, Temp=85°C, Comb=39.9%
+2025-12-16 09:45:44,429 - ERROR - Dispositivo hatch_007: Erro inesperado: Simulação de falha de conexão
+2025-12-16 09:45:44,464 - INFO - motorcycle_002 (motorcycle): RPM=2854, Vel=120.9km/h, Temp=85.4°C, Comb=45.6%
+2025-12-16 09:45:48,466 - INFO - pickup_015 (pickup): RPM=1323, Vel=49.3km/h, Temp=91.4°C, Comb=55.4%
+2025-12-16 09:45:48,566 - ERROR - Dispositivo motorcycle_010: Erro inesperado: Simulação de falha de conexão
+2025-12-16 09:45:49,264 - INFO - Monitor: 15/15 dispositivos ativos
+2025-12-16 09:45:52,666 - INFO - car_003 (car): RPM=1276, Vel=63.4km/h, Temp=85°C, Comb=67.9%
+2025-12-16 09:45:54,640 - INFO - motorcycle_010 (motorcycle): RPM=4857, Vel=160km/h, Temp=87.0°C, Comb=79.3%
+2025-12-16 09:45:56,618 - INFO - sport_005 (sport): RPM=2707, Vel=152.9km/h, Temp=90°C, Comb=96.0%
+2025-12-16 09:45:56,676 - INFO - sport_004 (sport): RPM=2851, Vel=147.6km/h, Temp=90°C, Comb=76.0%
+2025-12-16 09:45:56,755 - INFO - motorcycle_008 (motorcycle): RPM=4258, Vel=160km/h, Temp=85.4°C, Comb=89.0%
+2025-12-16 09:45:58,577 - INFO - pickup_006 (pickup): RPM=1816, Vel=83.3km/h, Temp=90°C, Comb=51.3%
+2025-12-16 09:45:59,266 - INFO - Monitor: 15/15 dispositivos ativos
+2025-12-16 09:46:00,779 - INFO - sport_004 (sport): RPM=2787, Vel=148.9km/h, Temp=90°C, Comb=76.0%
+2025-12-16 09:46:04,732 - INFO - sport_005 (sport): RPM=2790, Vel=154.9km/h, Temp=90°C, Comb=95.9%
+2025-12-16 09:46:04,809 - INFO - motorcycle_012 (motorcycle): RPM=3607, Vel=152.8km/h, Temp=85.4°C, Comb=75.5%
+2025-12-16 09:46:06,875 - INFO - motorcycle_010 (motorcycle): RPM=4762, Vel=160km/h, Temp=88.3°C, Comb=79.2%
+2025-12-16 09:46:08,808 - INFO - pickup_015 (pickup): RPM=1443, Vel=45.5km/h, Temp=90.3°C, Comb=55.3%
+2025-12-16 09:46:08,980 - INFO - suv_011 (suv): RPM=1040, Vel=61.5km/h, Temp=88°C, Comb=62.8%
+2025-12-16 09:46:09,267 - INFO - Monitor: 15/15 dispositivos ativos
+2025-12-16 09:46:12,906 - INFO - car_014 (car): RPM=824, Vel=50.8km/h, Temp=85°C, Comb=50.4%
+2025-12-16 09:46:13,015 - INFO - sport_004 (sport): RPM=2656, Vel=151.4km/h, Temp=90°C, Comb=76.0%
+2025-12-16 09:46:13,138 - INFO - motorcycle_008 (motorcycle): RPM=4416, Vel=160km/h, Temp=86.2°C, Comb=88.9%
+2025-12-16 09:46:16,982 - INFO - motorcycle_002 (motorcycle): RPM=2805, Vel=129.8km/h, Temp=85°C, Comb=45.5%
+2025-12-16 09:46:18,931 - INFO - pickup_006 (pickup): RPM=1642, Vel=82.1km/h, Temp=90°C, Comb=51.3%
+2025-12-16 09:46:19,268 - INFO - Monitor: 15/15 dispositivos ativos
+2025-12-16 09:46:21,220 - INFO - sport_004 (sport): RPM=2740, Vel=153.9km/h, Temp=90°C, Comb=76.0%
+2025-12-16 09:46:23,184 - INFO - motorcycle_010 (motorcycle): RPM=4501, Vel=160km/h, Temp=87.0°C, Comb=79.2%
+2025-12-16 09:46:25,304 - INFO - motorcycle_008 (motorcycle): RPM=4435, Vel=160km/h, Temp=87.4°C, Comb=88.9%
+2025-12-16 09:46:27,143 - INFO - hatch_007 (hatch): RPM=2147, Vel=117.6km/h, Temp=82°C, Comb=68.2%
+2025-12-16 09:46:29,269 - INFO - Monitor: 15/15 dispositivos ativos
+2025-12-16 09:46:37,254 - INFO - sport_005 (sport): RPM=3375, Vel=163.1km/h, Temp=90°C, Comb=95.9%
+2025-12-16 09:46:39,269 - INFO - Monitor: 15/15 dispositivos ativos
+2025-12-16 09:46:47,447 - INFO - pickup_006 (pickup): RPM=1822, Vel=77.1km/h, Temp=90°C, Comb=51.3%
+2025-12-16 09:46:49,270 - INFO - Monitor: 15/15 dispositivos ativos
